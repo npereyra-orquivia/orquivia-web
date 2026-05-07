@@ -1,10 +1,27 @@
 const body = document.body;
 const header = document.querySelector("[data-header]");
+const brandLoader = document.querySelector("[data-brand-loader]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const navLinks = document.querySelectorAll(".nav a");
 const year = document.querySelector("[data-year]");
 const form = document.querySelector("[data-contact-form]");
 const cookieStorageKey = "orquiviaCookieConsent";
+
+if (brandLoader) {
+  body.classList.add("is-loading");
+
+  const hideLoader = () => {
+    brandLoader.classList.add("is-hidden");
+    body.classList.remove("is-loading");
+    window.setTimeout(() => brandLoader.remove(), 650);
+  };
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    hideLoader();
+  } else {
+    window.setTimeout(hideLoader, 2450);
+  }
+}
 
 if (year) {
   year.textContent = new Date().getFullYear();
