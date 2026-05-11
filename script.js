@@ -6,19 +6,27 @@ const navLinks = document.querySelectorAll(".nav a");
 const year = document.querySelector("[data-year]");
 const form = document.querySelector("[data-contact-form]");
 const cookieStorageKey = "orquiviaCookieConsent";
+const loaderStorageKey = "orquiviaLoaderSeenAt";
+const loaderCooldown = 1000 * 60 * 60 * 8;
+const isEnglish = document.documentElement.lang === "en";
+const menuOpenLabel = isEnglish ? "Close menu" : "Cerrar menú";
+const menuClosedLabel = isEnglish ? "Open menu" : "Abrir menú";
 
 if (brandLoader) {
-  body.classList.add("is-loading");
-
   const hideLoader = () => {
     brandLoader.classList.add("is-hidden");
     body.classList.remove("is-loading");
     window.setTimeout(() => brandLoader.remove(), 650);
   };
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const lastSeenAt = Number(localStorage.getItem(loaderStorageKey) || 0);
+  const shouldShowLoader = Date.now() - lastSeenAt > loaderCooldown;
+
+  if (!shouldShowLoader || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     hideLoader();
   } else {
+    body.classList.add("is-loading");
+    localStorage.setItem(loaderStorageKey, String(Date.now()));
     window.setTimeout(hideLoader, 2450);
   }
 }
@@ -37,14 +45,14 @@ window.addEventListener("scroll", syncHeader, { passive: true });
 menuToggle?.addEventListener("click", () => {
   const isOpen = body.classList.toggle("menu-open");
   menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+  menuToggle.setAttribute("aria-label", isOpen ? menuOpenLabel : menuClosedLabel);
 });
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     body.classList.remove("menu-open");
     menuToggle?.setAttribute("aria-expanded", "false");
-    menuToggle?.setAttribute("aria-label", "Abrir menú");
+    menuToggle?.setAttribute("aria-label", menuClosedLabel);
   });
 });
 
@@ -101,7 +109,7 @@ form?.addEventListener("submit", (event) => {
   const subject = encodeURIComponent(`Consulta web Orquivia - ${nombre}`);
   const bodyText = encodeURIComponent(`Nombre: ${nombre}\nEmail: ${email}\n\nMensaje:\n${mensaje}`);
 
-  window.location.href = `mailto:contacto@orquivia.com?subject=${subject}&body=${bodyText}`;
+  window.location.href = `mailto:info@orquivia.com?subject=${subject}&body=${bodyText}`;
 });
 
 const showCookieBanner = () => {
@@ -109,21 +117,36 @@ const showCookieBanner = () => {
 
   const banner = document.createElement("section");
   banner.className = "cookie-banner";
-  banner.setAttribute("aria-label", "Aviso de cookies");
-  banner.innerHTML = `
-    <div>
-      <strong>Cookies</strong>
-      <p>
-        Usamos cookies técnicas y una preferencia local para recordar tu elección. Si en el futuro añadimos analítica,
-        solo se activará si aceptas.
-      </p>
-      <a href="politica-cookies.html">Política de cookies</a>
-    </div>
-    <div class="cookie-actions">
-      <button class="button secondary" type="button" data-cookie-choice="rejected">Rechazar</button>
-      <button class="button primary" type="button" data-cookie-choice="accepted">Aceptar</button>
-    </div>
-  `;
+  banner.setAttribute("aria-label", isEnglish ? "Cookie notice" : "Aviso de cookies");
+  banner.innerHTML = isEnglish
+    ? `
+      <div>
+        <strong>Cookies</strong>
+        <p>
+          We use technical cookies and a local preference to remember your choice. If analytics are added in the future,
+          they will only be enabled if you accept.
+        </p>
+        <a href="politica-cookies.html">Cookie policy</a>
+      </div>
+      <div class="cookie-actions">
+        <button class="button secondary" type="button" data-cookie-choice="rejected">Reject</button>
+        <button class="button primary" type="button" data-cookie-choice="accepted">Accept</button>
+      </div>
+    `
+    : `
+      <div>
+        <strong>Cookies</strong>
+        <p>
+          Usamos cookies técnicas y una preferencia local para recordar tu elección. Si en el futuro añadimos analítica,
+          solo se activará si aceptas.
+        </p>
+        <a href="politica-cookies.html">Política de cookies</a>
+      </div>
+      <div class="cookie-actions">
+        <button class="button secondary" type="button" data-cookie-choice="rejected">Rechazar</button>
+        <button class="button primary" type="button" data-cookie-choice="accepted">Aceptar</button>
+      </div>
+    `;
 
   document.body.appendChild(banner);
 
