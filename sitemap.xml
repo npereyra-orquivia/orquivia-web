@@ -8,6 +8,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/en.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/" />
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -16,26 +17,79 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/en.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/" />
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://orquivia.com/sobre-nosotros.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/sobre-nosotros.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/about-us.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/sobre-nosotros.html" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orquivia.com/about-us.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/sobre-nosotros.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/about-us.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/sobre-nosotros.html" />
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://orquivia.com/aviso-legal.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/aviso-legal.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/legal-notice.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/aviso-legal.html" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://orquivia.com/legal-notice.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/aviso-legal.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/legal-notice.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/aviso-legal.html" />
+    <lastmod>2026-05-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://orquivia.com/terminos-condiciones.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/terminos-condiciones.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/terms-and-conditions.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/terminos-condiciones.html" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://orquivia.com/terms-and-conditions.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/terminos-condiciones.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/terms-and-conditions.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/terminos-condiciones.html" />
+    <lastmod>2026-05-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://orquivia.com/politica-cookies.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/politica-cookies.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/cookies-policy.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/politica-cookies.html" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://orquivia.com/cookies-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/politica-cookies.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/cookies-policy.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/politica-cookies.html" />
+    <lastmod>2026-05-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>

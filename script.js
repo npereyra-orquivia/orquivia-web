@@ -126,7 +126,7 @@ const showCookieBanner = () => {
           We use technical cookies and a local preference to remember your choice. If analytics are added in the future,
           they will only be enabled if you accept.
         </p>
-        <a href="politica-cookies.html">Cookie policy</a>
+        <a href="cookies-policy.html">Cookie policy</a>
       </div>
       <div class="cookie-actions">
         <button class="button secondary" type="button" data-cookie-choice="rejected">Reject</button>
