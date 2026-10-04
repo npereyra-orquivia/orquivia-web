@@ -1,0 +1,529 @@
+{
+  "legal": {
+    "title": [
+      "Aviso legal.",
+      "Legal notice."
+    ],
+    "intro": [
+      "Identificación del titular, actividad y condiciones generales de este sitio.",
+      "Website owner, activity and general information."
+    ],
+    "summary": [
+      "La información del titular, en un lugar accesible.",
+      "Owner information, in one accessible place."
+    ],
+    "sections": [
+      {
+        "id": "titular",
+        "heading": [
+          "Titular y contacto",
+          "Owner and contact"
+        ],
+        "paragraphs": [
+          [
+            "Titular: {company}. Nombre comercial: Orquivia. NIF: {tax_id}.",
+            "Owner: {company}. Trading name: Orquivia. Spanish tax ID: {tax_id}."
+          ],
+          [
+            "Domicilio: {address}.",
+            "Address: {address}."
+          ],
+          [
+            "Correo electrónico: {email}. Teléfono: {phone}. Sitio web: {site_url}.",
+            "Email: {email}. Telephone: {phone}. Website: {site_url}."
+          ]
+        ],
+        "links": [
+          [
+            "Contactar con Orquivia",
+            "Contact Orquivia",
+            "contact"
+          ]
+        ]
+      },
+      {
+        "id": "actividad",
+        "heading": [
+          "Actividad y finalidad de la web",
+          "Activity and website purpose"
+        ],
+        "paragraphs": [
+          [
+            "Orquivia presta consultoría de procesos para despachos de arquitectura y gestores de proyectos: análisis de flujos de trabajo, automatizaciones, aplicaciones a medida y conexión de plataformas.",
+            "Orquivia provides process consulting for architecture practices and project managers: workflow analysis, automation, custom applications and platform integrations."
+          ],
+          [
+            "La web presenta servicios, ejemplos de aplicación, un caso de estudio e ideas prácticas. No permite comprar servicios ni realizar pagos. Las condiciones de cada encargo se detallan en una propuesta o contrato específico.",
+            "This website presents services, application examples, a case study and practical insights. It does not offer checkout or payments. Each engagement is governed by a specific proposal or agreement."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "contenidos",
+        "heading": [
+          "Contenidos y ejemplos",
+          "Content and examples"
+        ],
+        "paragraphs": [
+          [
+            "Los ejemplos de automatización describen aplicaciones posibles. Su viabilidad depende del proceso, de los permisos y de las capacidades de las herramientas utilizadas. No constituyen una garantía de ingresos, ahorro o resultados concretos.",
+            "Automation examples describe possible applications. Their feasibility depends on the workflow, permissions and capabilities of the tools involved. They do not guarantee revenue, savings or specific results."
+          ],
+          [
+            "El caso de Value Retail se refiere al trabajo de consultoría y estandarización gráfica descrito en su página. Las imágenes editoriales ilustran contenidos y no representan documentación confidencial de clientes.",
+            "The Value Retail case concerns the consulting and graphic standardisation described on its page. Editorial images illustrate content and do not represent confidential client documents."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "propiedad",
+        "heading": [
+          "Propiedad intelectual e industrial",
+          "Intellectual and industrial property"
+        ],
+        "paragraphs": [
+          [
+            "Los textos, diseños y recursos propios de Orquivia están protegidos por la normativa aplicable. Los recursos y marcas de terceros pertenecen a sus respectivos titulares y conservan sus condiciones de uso.",
+            "Orquivia’s own text, designs and assets are protected under applicable law. Third-party assets and trademarks belong to their respective owners and retain their terms of use."
+          ],
+          [
+            "Se permite consultar la web y enlazar sus páginas. La reproducción o explotación de sus contenidos debe respetar los derechos de sus titulares, las licencias aplicables y los usos permitidos por la ley.",
+            "You may browse the website and link to its pages. Reproduction or exploitation of its content must respect owners’ rights, applicable licences and uses permitted by law."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "enlaces",
+        "heading": [
+          "Enlaces y disponibilidad",
+          "Links and availability"
+        ],
+        "paragraphs": [
+          [
+            "Los enlaces externos se facilitan como referencia o para acceder a servicios elegidos por el visitante. Esos servicios tienen sus propias condiciones y políticas de privacidad. Orquivia no controla sus contenidos ni su disponibilidad.",
+            "External links provide references or access to services chosen by the visitor. Those services have their own terms and privacy policies. Orquivia does not control their content or availability."
+          ],
+          [
+            "Si detectas un error, un problema de accesibilidad o un contenido que pueda vulnerar derechos, comunícalo a {email}, indicando la página y el motivo. Se revisará y se adoptarán las medidas que correspondan.",
+            "If you find an error, an accessibility issue or content that may infringe rights, email {email} with the page and reason. It will be reviewed and appropriate action taken."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "privacidad",
+        "heading": [
+          "Privacidad y legislación",
+          "Privacy and applicable law"
+        ],
+        "paragraphs": [
+          [
+            "La información sobre consultas, datos personales, proveedores y cookies está disponible en la política de privacidad y cookies. Este aviso y el uso de la web se rigen por la legislación española y europea aplicable, sin limitar los derechos que correspondan al usuario.",
+            "Information about enquiries, personal data, providers and cookies is available in the privacy and cookies policy. This notice and website use are governed by applicable Spanish and European law, without limiting users’ statutory rights."
+          ]
+        ],
+        "links": [
+          [
+            "Privacidad y cookies",
+            "Privacy & cookies",
+            "cookies"
+          ],
+          [
+            "Condiciones de uso",
+            "Terms of use",
+            "terms"
+          ]
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "title": [
+      "Condiciones de uso.",
+      "Terms of use."
+    ],
+    "intro": [
+      "Qué puedes esperar de esta web y cómo se concreta un encargo de consultoría.",
+      "What to expect from this website and how a consulting engagement is agreed."
+    ],
+    "summary": [
+      "Las condiciones de la web y de cada encargo.",
+      "Website terms and individual engagements."
+    ],
+    "sections": [
+      {
+        "id": "objeto",
+        "heading": [
+          "Ámbito de estas condiciones",
+          "Scope"
+        ],
+        "paragraphs": [
+          [
+            "Estas condiciones regulan el uso del sitio web de {company}. La navegación es gratuita y no requiere crear una cuenta. Puedes consultar los datos del titular en el aviso legal.",
+            "These terms govern the website of {company}. Browsing is free and does not require an account. Owner details are available in the legal notice."
+          ],
+          [
+            "La web se dirige principalmente a empresas y profesionales del sector de la arquitectura y la gestión de proyectos. No sustituye una propuesta técnica ni un contrato de prestación de servicios.",
+            "The website is primarily intended for architecture and project management businesses and professionals. It does not replace a technical proposal or a services agreement."
+          ]
+        ],
+        "links": [
+          [
+            "Aviso legal",
+            "Legal notice",
+            "legal"
+          ]
+        ]
+      },
+      {
+        "id": "uso",
+        "heading": [
+          "Uso de la web",
+          "Website use"
+        ],
+        "paragraphs": [
+          [
+            "Utiliza la web de forma lícita y respetuosa con los derechos de otras personas. No está permitido introducir código malicioso, intentar acceder a sistemas sin autorización ni interferir en el funcionamiento del sitio.",
+            "Use the website lawfully and respect other people’s rights. Introducing malicious code, attempting unauthorised access or interfering with the website’s operation is prohibited."
+          ],
+          [
+            "Los contenidos pueden consultarse y compartirse mediante enlaces. Su reproducción y reutilización están sujetas a los derechos de propiedad intelectual, las licencias de terceros y las excepciones legales aplicables.",
+            "Content may be read and shared through links. Reproduction and reuse are subject to intellectual property rights, third-party licences and applicable legal exceptions."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "consultas",
+        "heading": [
+          "Consultas y propuestas de llamada",
+          "Enquiries and suggested calls"
+        ],
+        "paragraphs": [
+          [
+            "El formulario prepara un mensaje en tu dispositivo para revisarlo y enviarlo desde tu correo. Pulsar «Preparar conversación» no envía la consulta ni contrata un servicio. El envío se confirma en tu aplicación o servicio de correo.",
+            "The form prepares a message on your device for review and sending through your email. Selecting “Prepare our conversation” does not send the enquiry or order a service. Sending is confirmed in your email app or service."
+          ],
+          [
+            "Las fechas y horas propuestas por correo quedan pendientes de confirmación expresa de Orquivia. Una solicitud de conversación no genera por sí sola una reserva confirmada, una obligación de contratar ni una aceptación de presupuesto.",
+            "Dates and times suggested by email require explicit confirmation from Orquivia. An enquiry alone does not create a confirmed booking, an obligation to purchase or acceptance of a quotation."
+          ],
+          [
+            "Si se facilita un enlace a una agenda externa, las instrucciones de confirmación y cancelación se mostrarán en ese servicio. La llamada inicial no implica la contratación de trabajos posteriores.",
+            "If a link to an external booking calendar is provided, confirmation and cancellation instructions will be shown by that service. An initial call does not constitute an order for subsequent work."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "encargos",
+        "heading": [
+          "Contratación y alcance de los servicios",
+          "Engagements and service scope"
+        ],
+        "paragraphs": [
+          [
+            "Antes de iniciar un encargo, una propuesta o contrato establecerá el alcance, los entregables, las responsabilidades, el calendario, los honorarios, los impuestos, las condiciones de pago y, cuando proceda, el mantenimiento o soporte.",
+            "Before work begins, a proposal or agreement will define scope, deliverables, responsibilities, schedule, fees, taxes, payment terms and, where applicable, maintenance or support."
+          ],
+          [
+            "Las integraciones y automatizaciones requieren comprobar accesos, compatibilidad y permisos de las plataformas. Las funcionalidades que no estén incluidas en el alcance, así como sus cambios, se documentarán en una propuesta adicional cuando corresponda.",
+            "Integrations and automation require access, compatibility and platform permissions to be checked. Functions outside the agreed scope and any changes will be documented in an additional proposal where appropriate."
+          ],
+          [
+            "Las condiciones específicas del encargo prevalecerán respecto de la prestación contratada, sin perjuicio de las normas imperativas y de los derechos que legalmente correspondan.",
+            "The engagement’s specific terms govern the services ordered, without prejudice to mandatory law or statutory rights."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "confidencialidad",
+        "heading": [
+          "Información y confidencialidad",
+          "Information and confidentiality"
+        ],
+        "paragraphs": [
+          [
+            "Para una consulta inicial basta con describir el proceso. Evita enviar contraseñas, datos de salud, información personal innecesaria o documentos confidenciales de terceros sin autorización.",
+            "For an initial enquiry, a description of the workflow is enough. Avoid sending passwords, health information, unnecessary personal data or confidential third-party documents without authorisation."
+          ],
+          [
+            "El acceso a documentación de trabajo, los compromisos de confidencialidad, la titularidad de los entregables y el tratamiento de datos por cuenta del cliente se concretarán en los acuerdos correspondientes antes de acceder a esa información.",
+            "Access to working documents, confidentiality commitments, deliverable ownership and processing of data on a client’s behalf will be defined in the relevant agreements before that information is accessed."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "resultados",
+        "heading": [
+          "Ejemplos, resultados y responsabilidad",
+          "Examples, outcomes and responsibility"
+        ],
+        "paragraphs": [
+          [
+            "Los ejemplos del sitio son orientativos y no acreditan que una solución esté implantada en una empresa concreta, salvo cuando se identifica expresamente un caso real. Los indicadores se definirán según el proyecto y la información disponible.",
+            "Website examples are illustrative and do not establish that a solution has been implemented at a particular company, except where a real case is expressly identified. Measures will be defined according to the project and available information."
+          ],
+          [
+            "Orquivia procurará mantener la información actualizada y corregir las incidencias comunicadas. No se garantiza una disponibilidad ininterrumpida ni la ausencia absoluta de errores. Esta previsión no excluye responsabilidades que no puedan limitarse legalmente.",
+            "Orquivia will seek to keep information up to date and correct reported issues. Uninterrupted availability or complete absence of errors is not guaranteed. This provision does not exclude liability that cannot lawfully be limited."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "cambios",
+        "heading": [
+          "Actualizaciones y consultas",
+          "Updates and enquiries"
+        ],
+        "paragraphs": [
+          [
+            "Las condiciones podrán actualizarse para reflejar cambios del sitio o de la normativa. La fecha de revisión figura en esta página. Las actualizaciones no modifican por sí solas contratos ya formalizados.",
+            "These terms may be updated to reflect website or legal changes. The revision date appears on this page. Updates do not by themselves alter agreements already entered into."
+          ],
+          [
+            "Para preguntas sobre el sitio o estas condiciones, escribe a {email}.",
+            "For questions about the website or these terms, email {email}."
+          ]
+        ],
+        "links": [
+          [
+            "Privacidad y cookies",
+            "Privacy & cookies",
+            "cookies"
+          ]
+        ]
+      },
+      {
+        "id": "ley",
+        "heading": [
+          "Legislación y resolución de controversias",
+          "Law and dispute resolution"
+        ],
+        "paragraphs": [
+          [
+            "Se aplica la legislación española y europea que corresponda. Las controversias se someterán a los juzgados y tribunales competentes conforme a las reglas legales aplicables. No se impone una renuncia a fueros o derechos que tengan carácter obligatorio.",
+            "Applicable Spanish and European law governs these terms. Disputes will be brought before the courts with jurisdiction under the applicable legal rules. No waiver of mandatory jurisdiction or statutory rights is imposed."
+          ]
+        ],
+        "links": []
+      }
+    ]
+  },
+  "cookies": {
+    "title": [
+      "Privacidad y cookies.",
+      "Privacy & cookies."
+    ],
+    "intro": [
+      "Cómo se tratan los datos al navegar, contactar y proponer una llamada.",
+      "How data is handled when you browse, contact us and suggest a call."
+    ],
+    "summary": [
+      "Tus datos, la consulta y tus derechos.",
+      "Your data, your enquiry and your rights."
+    ],
+    "sections": [
+      {
+        "id": "privacidad",
+        "heading": [
+          "Responsable del tratamiento",
+          "Data controller"
+        ],
+        "paragraphs": [
+          [
+            "El responsable de los datos de las consultas recibidas por Orquivia es {company}, NIF {tax_id}, con domicilio en {address}. Puedes contactar para cuestiones de privacidad en {email}.",
+            "The controller for enquiries received by Orquivia is {company}, Spanish tax ID {tax_id}, at {address}. Contact {email} for privacy matters."
+          ]
+        ],
+        "links": [
+          [
+            "Identificación del titular",
+            "Website owner details",
+            "legal"
+          ]
+        ]
+      },
+      {
+        "id": "datos",
+        "heading": [
+          "Datos que facilitas y funcionamiento del formulario",
+          "Data you provide and how the form works"
+        ],
+        "paragraphs": [
+          [
+            "Para preparar una consulta se solicitan nombre, correo profesional, empresa o proyecto y una descripción del proceso. El foco de interés y la fecha y hora propuestas son opcionales. Los campos obligatorios permiten identificar la consulta y responder; si no los completas, puedes escribir directamente por correo.",
+            "Preparing an enquiry asks for your name, work email, business or project and a workflow description. Focus areas and suggested date and time are optional. Required fields identify the enquiry and allow a reply; you can instead email us directly."
+          ],
+          [
+            "Las respuestas se utilizan dentro de la página para componer el mensaje. Este formulario no las envía a un servidor ni las guarda en almacenamiento local. Puedes revisarlas, editarlas y elegir si abres tu correo o copias el mensaje. Orquivia recibe esos datos cuando envías el correo.",
+            "Answers are used within the page to compose your message. This form does not send them to a server or save them in local storage. You can review, edit and choose whether to open your email or copy the message. Orquivia receives the data when you send the email."
+          ],
+          [
+            "Envía solo información necesaria para explicar el proceso. No incluyas contraseñas ni información sensible o confidencial de terceros. La casilla de lectura de esta política no implica una suscripción comercial.",
+            "Send only information needed to explain the workflow. Do not include passwords or sensitive or confidential third-party information. Acknowledging this policy does not subscribe you to marketing."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "finalidades",
+        "heading": [
+          "Finalidades y bases jurídicas",
+          "Purposes and legal bases"
+        ],
+        "paragraphs": [
+          [
+            "Usamos los datos recibidos para responder la consulta, organizar una conversación y, si lo solicitas, preparar una propuesta. Cuando solicitas medidas previas a un contrato en tu propio nombre, la base es el artículo 6.1.b del RGPD. Para contactos en representación de una empresa, la base es el interés legítimo en atender solicitudes profesionales y mantener esa comunicación (artículo 6.1.f).",
+            "Received data is used to reply to your enquiry, arrange a conversation and, if requested, prepare a proposal. If you request pre-contractual steps on your own behalf, the basis is GDPR Article 6(1)(b). For contacts representing a business, the basis is the legitimate interest in responding to professional enquiries and maintaining that communication (Article 6(1)(f))."
+          ],
+          [
+            "No utilizamos una consulta para incorporarte automáticamente a una lista comercial. Esta web no toma decisiones automatizadas con efectos jurídicos sobre ti ni elabora perfiles publicitarios.",
+            "An enquiry does not automatically add you to a marketing list. This website does not make automated decisions with legal effects on you or create advertising profiles."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "conservacion",
+        "heading": [
+          "Conservación",
+          "Retention"
+        ],
+        "paragraphs": [
+          [
+            "Los mensajes y propuestas se conservan mientras sean necesarios para gestionar la solicitud y su seguimiento. Si no se formaliza un encargo, se suprimen cuando deja de existir esa necesidad, salvo la información que deba conservarse por obligaciones legales o para atender posibles reclamaciones.",
+            "Messages and proposals are kept while needed to handle the request and follow-up. If no engagement is agreed, they are deleted when no longer needed, except for information that must be retained for legal obligations or potential claims."
+          ],
+          [
+            "Si se contrata un servicio, se aplicarán los plazos legales y contractuales correspondientes a su documentación. Cuando proceda, la información se mantendrá bloqueada durante los plazos de responsabilidad y se eliminará al finalizar estos. Los registros del proveedor de alojamiento siguen los criterios de su política de privacidad.",
+            "If a service is ordered, applicable legal and contractual retention periods will govern its records. Where required, information will be restricted during liability periods and deleted afterwards. Hosting provider logs follow the retention criteria in its privacy policy."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "proveedores",
+        "heading": [
+          "Proveedores y transferencias",
+          "Providers and transfers"
+        ],
+        "paragraphs": [
+          [
+            "La web se aloja en GitHub Pages. GitHub indica que registra la dirección IP de los visitantes por motivos de seguridad, incluso sin iniciar sesión. Este registro técnico es distinto de instalar analítica comercial en esta web.",
+            "The website is hosted on GitHub Pages. GitHub states that visitors’ IP addresses are logged for security purposes, including when not signed in. This technical logging is distinct from installing commercial analytics on this website."
+          ],
+          [
+            "GitHub trata datos en Estados Unidos y otros países. Según su política, utiliza mecanismos como cláusulas contractuales tipo y el Marco de Privacidad de Datos cuando resulten aplicables. Puedes consultar los detalles, las garantías y cómo ejercer derechos frente a GitHub en su política.",
+            "GitHub processes data in the United States and other countries. Its policy describes mechanisms such as standard contractual clauses and the Data Privacy Framework where applicable. Its policy explains those safeguards and how to exercise rights with GitHub."
+          ],
+          [
+            "El correo profesional de Orquivia utiliza Arsys. Al enviar una consulta, los servicios de correo del remitente y del destinatario intervienen en su transmisión y almacenamiento. No vendemos los datos de las consultas. También podrán acceder a información las autoridades cuando exista obligación legal.",
+            "Orquivia’s business email uses Arsys. When an enquiry is sent, the sender’s and recipient’s email services handle transmission and storage. We do not sell enquiry data. Authorities may also receive information where legally required."
+          ]
+        ],
+        "links": [
+          [
+            "Privacidad de GitHub",
+            "GitHub privacy policy",
+            "https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement"
+          ],
+          [
+            "Información sobre GitHub Pages y datos de visitas",
+            "GitHub Pages visitor data information",
+            "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+          ],
+          [
+            "Información legal y privacidad de Arsys",
+            "Arsys legal and privacy information",
+            "https://www.arsys.es/legal"
+          ]
+        ]
+      },
+      {
+        "id": "derechos",
+        "heading": [
+          "Tus derechos",
+          "Your rights"
+        ],
+        "paragraphs": [
+          [
+            "Puedes solicitar acceso, rectificación, supresión, limitación del tratamiento, oposición y, cuando sea aplicable, portabilidad escribiendo a {email}. Indica el derecho que deseas ejercer y la información necesaria para localizar la consulta. Solo se pedirá información adicional de identidad si existen dudas razonables.",
+            "You may request access, rectification, erasure, restriction, objection and, where applicable, portability by emailing {email}. Specify the right and information needed to locate the enquiry. Additional identity information will only be requested if there are reasonable doubts."
+          ],
+          [
+            "Si un tratamiento se basa en consentimiento, puedes retirarlo sin que ello afecte a la licitud del tratamiento anterior. Las solicitudes se atenderán en los plazos legales; normalmente, en un mes. Si consideras que tus derechos no se han atendido, puedes reclamar ante la Agencia Española de Protección de Datos o la autoridad de control competente.",
+            "Where processing relies on consent, you may withdraw it without affecting the lawfulness of earlier processing. Requests will be handled within statutory deadlines, normally one month. If you believe your rights have not been respected, you may complain to the Spanish Data Protection Agency or the competent supervisory authority."
+          ]
+        ],
+        "links": [
+          [
+            "Agencia Española de Protección de Datos",
+            "Spanish Data Protection Agency",
+            "https://www.aepd.es/"
+          ]
+        ]
+      },
+      {
+        "id": "cookies",
+        "heading": [
+          "Cookies y almacenamiento en el navegador",
+          "Cookies and browser storage"
+        ],
+        "paragraphs": [
+          [
+            "El código de esta versión no instala cookies de analítica, publicidad o seguimiento ni guarda respuestas del formulario en el navegador. Las fuentes, imágenes e iconos se sirven desde el sitio. No se cargan mapas, vídeos, agendas incrustadas ni píxeles de seguimiento de terceros.",
+            "This version’s code does not install analytics, advertising or tracking cookies or store form answers in the browser. Fonts, images and icons are served by the site. No third-party embedded maps, videos, calendars or tracking pixels are loaded."
+          ],
+          [
+            "Por ese motivo, no se muestra un panel para aceptar cookies opcionales que esta versión no utiliza. Si se incorporan tecnologías no necesarias, se informará de sus finalidades, proveedores y duración y se solicitará el consentimiento antes de activarlas, con opciones para aceptarlas, rechazarlas y cambiar la elección.",
+            "Accordingly, this version does not show a consent panel for optional cookies it does not use. If non-essential technologies are introduced, their purposes, providers and duration will be disclosed and consent requested before activation, with options to accept, reject and change the choice."
+          ],
+          [
+            "El navegador permite consultar y eliminar cookies y datos almacenados de este dominio, incluidos restos de versiones anteriores. Borrarlos no elimina los correos que ya hayas enviado ni los registros del proveedor de alojamiento.",
+            "Your browser allows cookies and stored data for this domain to be viewed and deleted, including remnants of earlier versions. Deleting them does not delete emails already sent or hosting provider logs."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "agenda",
+        "heading": [
+          "Llamadas y servicios externos",
+          "Calls and external services"
+        ],
+        "paragraphs": [
+          [
+            "La propuesta de fecha del formulario se incluye en el correo y queda pendiente de confirmación. No se consulta tu agenda ni se accede a tu cuenta de correo desde esta web.",
+            "The form’s suggested date is included in the email and requires confirmation. This website does not read your calendar or access your email account."
+          ],
+          [
+            "Si accedes mediante un enlace a un servicio externo de reservas, pasarás a su sitio y se aplicará su información de privacidad. Esta web no lo carga automáticamente. Los datos y condiciones de ese servicio deben revisarse antes de confirmar una reserva.",
+            "If you follow a link to an external booking service, you will visit its website and its privacy information applies. This website does not load that service automatically. Review its data use and terms before confirming a booking."
+          ]
+        ],
+        "links": []
+      },
+      {
+        "id": "actualizacion",
+        "heading": [
+          "Actualizaciones y contacto",
+          "Updates and contact"
+        ],
+        "paragraphs": [
+          [
+            "Esta política describe el funcionamiento de la versión actual. Se actualizará si cambian los formularios, proveedores o tecnologías utilizadas. Para cualquier cuestión sobre tus datos, contacta con {email}.",
+            "This policy describes the current version. It will be updated if forms, providers or technologies change. For any questions about your data, contact {email}."
+          ]
+        ],
+        "links": []
+      }
+    ]
+  }
+}
