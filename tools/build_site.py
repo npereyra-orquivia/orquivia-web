@@ -211,7 +211,8 @@ def legal(key):
     for i, section in enumerate(data['sections']):
         links=''.join(f'<li><a href="{url(link[2]) if link[2] in ROUTES else escape(link[2],quote=True)}">{escape(link[LANG])}</a></li>' for link in section.get('links', []))
         if key=='legal' and section['id']=='titular' and SETTINGS.get('registry'):
-            section['paragraphs'].append([SETTINGS['registry'], SETTINGS['registry']])
+            section['paragraphs'].append([SETTINGS['registry'], SETTINGS.get('registry_en',SETTINGS['registry'])])
+            links+=f'<li><a href="{escape(SETTINGS["registry_source"],quote=True)}">{t("Publicación registral en el BORME","Registry publication in the BORME")}</a></li>'
         sections.append(f'<article id="{section["id"]}"><h2>{i+1}. {escape(section["heading"][LANG])}</h2>'+''.join(paragraph(p[LANG]) for p in section['paragraphs'])+(f'<ul>{links}</ul>' if links else '')+'</article>')
     registry_note=''
     if key=='legal' and not SETTINGS.get('registry'):

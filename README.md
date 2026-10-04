@@ -32,7 +32,7 @@ Añadir ese enlace HTTPS en `booking_url` de `content/site-settings.json` y reco
 
 ## Pendiente antes de publicar
 
-- Completar en `content/site-settings.json` los datos de inscripción de Orquivia Global SL en el Registro Mercantil. El aviso legal los señala como pendientes.
+- Los datos de inscripción se contrastaron con el BORME del 18 de marzo de 2026: Registro Mercantil de Barcelona, sección 8, hoja B 652730, inscripción 1. La fuente oficial se enlaza desde el aviso legal.
 - Confirmar razón social, NIF y domicilio del aviso anterior, reutilizados en esta propuesta.
 - Cuando se publique, verificar `orquivia.com` en Google Search Console y enviar `https://orquivia.com/sitemap.xml`. La indexación y posiciones dependen de Google; no se garantizan.
 
