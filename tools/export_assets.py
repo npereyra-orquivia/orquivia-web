@@ -7,6 +7,7 @@ import re
 
 def copy_assets(source_root, destination):
     pending = [source_root/'styles.css', source_root/'script.js']
+    pending.extend((source_root/'assets/diagrams').glob('orquivia-share-*.png'))
     class Assets(HTMLParser):
         def handle_starttag(self, tag, attrs):
             a=dict(attrs)

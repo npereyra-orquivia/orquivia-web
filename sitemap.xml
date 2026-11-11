@@ -121,6 +121,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/integraciones.html" />
   </url>
   <url>
+    <loc>https://orquivia.com/gestion-operativa.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/gestion-operativa.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/operational-coordination.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/gestion-operativa.html" />
+  </url>
+  <url>
+    <loc>https://orquivia.com/operational-coordination.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/gestion-operativa.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/operational-coordination.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/gestion-operativa.html" />
+  </url>
+  <url>
     <loc>https://orquivia.com/antes-de-elegir-herramientas.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/antes-de-elegir-herramientas.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/before-choosing-tools.html" />

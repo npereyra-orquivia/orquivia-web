@@ -1,6 +1,6 @@
 # Orquivia · Web bilingüe
 
-Sitio estático para la consultoría de procesos, automatización, aplicaciones a medida e integración de plataformas para despachos de arquitectura.
+Sitio estático para organización de documentación y procesos, coordinación de actuaciones concretas y aplicaciones de gestión a medida. La experiencia incluye arquitectura, retail, project managers, pequeños negocios y equipos de postventa.
 
 El dominio configurado en GitHub Pages es `orquivia.com`. Se conserva el archivo CNAME.
 
@@ -38,4 +38,6 @@ Añadir ese enlace HTTPS en `booking_url` de `content/site-settings.json` y reco
 
 La web no instala analítica ni publicidad. La privacidad describe el formulario, el correo de Arsys y los registros de seguridad de GitHub Pages. Si se añaden nuevas herramientas, revisar la política según el funcionamiento real.
 
-Las tres nuevas imágenes editoriales ilustran automatización documental, apps de seguimiento y sincronización de plataformas. Se generaron con ImageGen; no representan productos implantados ni documentación de clientes. El caso de Value Retail conserva su alcance real de consultoría y estandarización gráfica.
+Los visuales son esquemas SVG bilingües: documentación, coordinación, herramientas de gestión, consultas sobre un plano y conexiones. Se regeneran con `python tools/build_diagrams.py` y no simulan fotografías ni pantallas de productos implantados. Se mantiene el retrato seleccionado de Nicole. El caso de Value Retail conserva su alcance real de consultoría y estandarización gráfica.
+
+La oferta se resume en tres servicios. Los ejemplos se basan en trabajos descritos por Nicole y no atribuyen ahorros, ingresos ni funcionalidades no aportadas. La aplicación para project managers permite crear y seguir consultas visualmente desde un plano. La coordinación de actuaciones tiene una página propia: `gestion-operativa.html` / `operational-coordination.html`.
