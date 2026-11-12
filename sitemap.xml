@@ -193,6 +193,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/politica-cookies.html" />
   </url>
   <url>
+    <loc>https://orquivia.com/mapa-web.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/mapa-web.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/site-map.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/mapa-web.html" />
+  </url>
+  <url>
+    <loc>https://orquivia.com/site-map.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/mapa-web.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/site-map.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orquivia.com/mapa-web.html" />
+  </url>
+  <url>
     <loc>https://orquivia.com/app-seguimiento.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://orquivia.com/app-seguimiento.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://orquivia.com/tracking-app.html" />

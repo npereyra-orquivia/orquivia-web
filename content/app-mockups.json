@@ -1,7 +1,7 @@
 [
   {
     "key": "queries",
-    "image": "app-consultas-captura-v2",
+    "image": "app-consultas-plano-ficticio-v3",
     "title": [
       "Cada consulta, en su contexto.",
       "Every query, in context."
@@ -11,8 +11,8 @@
       "An application for creating and tracking queries visually from a drawing. The project provides the context for finding the follow-up."
     ],
     "alt": [
-      "Interfaz de la aplicación de consultas sobre un plano con datos anonimizados",
-      "Drawing-based query application interface with anonymised data"
+      "Aplicación de consultas con un plano ficticio de un edificio con patio y panel de seguimiento",
+      "Query application with a fictional courtyard building plan and a tracking panel"
     ],
     "service": "coordination",
     "width": 1586,

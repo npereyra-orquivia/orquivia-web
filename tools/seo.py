@@ -5,6 +5,7 @@ from xml.etree import ElementTree as ET
 import json
 
 DESCRIPTIONS = {
+ 'site-map': ('Todas las páginas de Orquivia: consultoría, servicios, casos, ideas, contacto e información legal, con enlaces en español e inglés.', 'Explore every Orquivia page: consulting, services, case study, insights, contact and legal information, with Spanish and English links.'),
  'home': ('Más control y capacidad para despachos de arquitectura y project managers. Procesos y herramientas para anticipar bloqueos y responder mejor al cliente.', 'More control and capacity for architecture practices and project managers. Workflows and tailored tools to anticipate blockers and keep clients informed.'),
  'consulting': ('Consultoría para despachos de arquitectura y gestores de proyectos: documentación, coordinación y herramientas que encajan con sus procesos actuales.', 'Consulting for architecture practices and project managers: documentation, coordination and tools that fit their existing workflows.'),
  'applications': ('Soluciones para despachos de arquitectura y project managers: organizar información, coordinar actuaciones y crear herramientas de gestión a medida.', 'Solutions for architecture practices and project managers: organise information, coordinate assignments and build tailored management tools.'),

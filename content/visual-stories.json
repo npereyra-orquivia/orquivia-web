@@ -1,0 +1,110 @@
+{
+  "documents": {
+    "title": ["De buscar documentos a preparar la entrega.", "From finding documents to preparing delivery."],
+    "steps": [
+      [["Reunir", "Gather"], ["Documentación existente", "Existing documents"]],
+      [["Dar criterio", "Set standards"], ["Versiones, nombres y revisión", "Versions, naming and review"]],
+      [["Compartir", "Share"], ["Una base que el equipo puede usar", "A foundation the team can use"]]
+    ],
+    "note": ["El recorrido se concreta al revisar la documentación y las herramientas del despacho.", "The workflow is defined by reviewing the practice’s documents and tools."]
+  },
+  "operations": {
+    "title": ["Cada paso, preparado para el siguiente.", "Each step, ready for the next."],
+    "steps": [
+      [["Preparar", "Prepare"], ["Alcance, recursos y fecha", "Scope, resources and date"]],
+      [["Coordinar", "Coordinate"], ["Secuencia y responsables", "Sequence and responsibilities"]],
+      [["Comprobar", "Check"], ["Seguimiento hasta la entrega", "Follow-up through delivery"]]
+    ],
+    "note": ["Una actuación concreta, con responsabilidades y alcance definidos antes de empezar.", "A specific assignment, with responsibilities and scope defined before work begins."]
+  },
+  "coordination": {
+    "title": ["Tu proceso, convertido en una herramienta.", "Your workflow, turned into a tool."],
+    "steps": [
+      [["Registrar", "Record"], ["La consulta o el dato necesario", "The query or information needed"]],
+      [["Relacionar", "Connect"], ["Proyecto, documento y estado", "Project, document and status"]],
+      [["Dar seguimiento", "Follow through"], ["El siguiente paso, visible", "The next step, visible"]]
+    ],
+    "note": ["Ejemplo de recorrido. Los campos y las funciones se definen para cada aplicación.", "Illustrative workflow. Fields and features are defined for each application."]
+  },
+  "integrations": {
+    "title": ["Un dato de origen. Un recorrido conectado.", "One source. A connected workflow."],
+    "steps": [
+      [["Origen", "Source"], ["Dónde se registra el dato", "Where information is recorded"]],
+      [["Validación", "Validation"], ["Qué debe comprobarse", "What needs to be checked"]],
+      [["Destino", "Destination"], ["Dónde tiene que estar disponible", "Where it needs to be available"]]
+    ],
+    "note": ["Ejemplo de conexión. Cada integración depende de las capacidades y los permisos de las plataformas.", "Illustrative connection. Each integration depends on platform capabilities and permissions."]
+  },
+  "article-onboarding": {
+    "title": ["Un alta que prepara el arranque.", "An intake that prepares the start."],
+    "steps": [
+      [["Alta del encargo", "Project intake"], ["Un registro de referencia", "One reference record"]],
+      [["Comprobar datos", "Check information"], ["Lo necesario para empezar", "What is needed to start"]],
+      [["Preparar el proyecto", "Prepare the project"], ["Carpetas, documentos y tareas", "Folders, documents and tasks"]]
+    ],
+    "note": ["Recorrido ilustrativo. La prueba debe comprobar si mejora el arranque real del encargo.", "Illustrative workflow. A pilot should check whether it improves the actual project start."]
+  },
+  "article-documents": {
+    "title": ["Recibido no significa revisado.", "Received does not mean reviewed."],
+    "steps": [
+      [["Solicitado", "Requested"], ["Documento y fecha prevista", "Document and expected date"]],
+      [["Recibido", "Received"], ["Disponible para su revisión", "Available for review"]],
+      [["Revisado", "Reviewed"], ["Validación del profesional", "Professional approval"]]
+    ],
+    "note": ["Los estados ordenan el seguimiento. La validación técnica sigue en manos del profesional responsable.", "Statuses organise follow-up. Technical approval remains with the responsible professional."]
+  },
+  "article-status": {
+    "title": ["Una respuesta con contexto.", "An answer with context."],
+    "steps": [
+      [["Qué ha cambiado", "What has changed"], ["Información actualizada", "Current information"]],
+      [["Qué está pendiente", "What is outstanding"], ["Decisiones y bloqueos", "Decisions and blockers"]],
+      [["Qué viene después", "What comes next"], ["Próximo hito y responsable", "Next milestone and owner"]]
+    ],
+    "note": ["Ejemplo de vista de seguimiento. Su utilidad depende de mantener los datos vigentes.", "Illustrative tracking view. Its value depends on keeping the data current."]
+  },
+  "article-app": {
+    "title": ["Primero, el recorrido. Después, la herramienta.", "First the workflow. Then the tool."],
+    "steps": [
+      [["Definir", "Define"], ["Qué se registra y quién lo mantiene", "What is recorded and who maintains it"]],
+      [["Probar", "Test"], ["Un recorrido acotado", "A focused workflow"]],
+      [["Comprobar", "Check"], ["Si mejora la gestión", "Whether management improves"]]
+    ],
+    "note": ["Ordenar el proceso puede bastar. Una app tiene sentido cuando resuelve necesidades que siguen pendientes.", "Organising the process may be enough. An app makes sense when it addresses needs that remain unresolved."]
+  },
+  "article-changes": {
+    "title": ["Del mensaje a una decisión que se puede seguir.", "From a message to a decision you can track."],
+    "steps": [
+      [["Petición", "Request"], ["Qué cambia y dónde", "What changes and where"]],
+      [["Decisión", "Decision"], ["Criterio y responsable", "Rationale and owner"]],
+      [["Aplicación", "Implementation"], ["Trabajo y documentos afectados", "Affected work and documents"]]
+    ],
+    "note": ["Recorrido ilustrativo. Registrar una petición no equivale a aprobarla.", "Illustrative workflow. Recording a request is not the same as approving it."]
+  },
+  "article-milestone": {
+    "title": ["De la entrega a la preparación administrativa.", "From delivery to administrative preparation."],
+    "steps": [
+      [["Hito realizado", "Milestone completed"], ["Entrega identificada", "Identified deliverable"]],
+      [["Condiciones verificadas", "Conditions verified"], ["Aceptación y documentación", "Acceptance and documents"]],
+      [["Preparar facturación", "Prepare invoicing"], ["Datos listos para revisión", "Information ready for review"]]
+    ],
+    "note": ["Ejemplo de recorrido. La preparación no sustituye la revisión económica ni las condiciones del contrato.", "Illustrative workflow. Preparation does not replace financial review or contract terms."]
+  },
+  "article-process": {
+    "title": ["Dibuja el recorrido antes de elegir la plataforma.", "Map the workflow before choosing a platform."],
+    "steps": [
+      [["Tarea real", "Real task"], ["Dónde empieza y por quién pasa", "Where it starts and who is involved"]],
+      [["Causa", "Cause"], ["Qué impide avanzar", "What prevents progress"]],
+      [["Cambio concreto", "Specific change"], ["Un criterio, un paso o una conexión", "A standard, step or connection"]]
+    ],
+    "note": ["La herramienta se elige para resolver una causa concreta.", "Choose the tool to address a specific cause."]
+  },
+  "article-step": {
+    "title": ["Un primer recorrido para comprobar el cambio.", "One first workflow to assess the change."],
+    "steps": [
+      [["Punto de partida", "Starting point"], ["Una tarea y su efecto", "One task and its effect"]],
+      [["Prueba acotada", "Focused pilot"], ["Un cambio con alcance claro", "A change with clear scope"]],
+      [["Resultado", "Outcome"], ["Comparar, ajustar y decidir", "Compare, adjust and decide"]]
+    ],
+    "note": ["La decisión de ampliar se apoya en lo observado durante la prueba.", "The decision to extend the change is based on what the pilot shows."]
+  }
+}
