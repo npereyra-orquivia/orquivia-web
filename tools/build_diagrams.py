@@ -175,7 +175,7 @@ def sharing(lang):
     for label in lines:
         draw.text((84,y),label,font=font(58),fill=PAPER)
         y+=81
-    draw.text((84,540),'CONSULTORÍA' if lang=='es' else 'CONSULTING',font=font(22),fill=SAGE)
+    draw.text((84,540),'ARQUITECTURA · PROJECT MANAGERS' if lang=='es' else 'ARCHITECTURE · PROJECT MANAGERS',font=font(22),fill=SAGE)
     for i,color in enumerate([SAGE,GOLD,PAPER]):
         x=956+i*62
         if i:draw.line((x-42,557,x-22,557),fill='#6f817e',width=2)

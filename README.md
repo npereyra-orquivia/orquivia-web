@@ -41,3 +41,5 @@ La web no instala analítica ni publicidad. La privacidad describe el formulario
 Los visuales son esquemas SVG bilingües: documentación, coordinación, herramientas de gestión, consultas sobre un plano y conexiones. Se regeneran con `python tools/build_diagrams.py` y no simulan fotografías ni pantallas de productos implantados. Se mantiene el retrato seleccionado de Nicole. El caso de Value Retail conserva su alcance real de consultoría y estandarización gráfica.
 
 La oferta se resume en tres servicios. Los ejemplos se basan en trabajos descritos por Nicole y no atribuyen ahorros, ingresos ni funcionalidades no aportadas. La aplicación para project managers permite crear y seguir consultas visualmente desde un plano. La coordinación de actuaciones tiene una página propia: `gestion-operativa.html` / `operational-coordination.html`.
+
+El público comercial es despachos de arquitectura y project managers. Los otros negocios son experiencia previa, mencionada en Sobre Orquivia, y no segmentos de captación.

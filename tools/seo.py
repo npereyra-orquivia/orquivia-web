@@ -5,32 +5,32 @@ from xml.etree import ElementTree as ET
 import json
 
 DESCRIPTIONS = {
- 'home': ('Organización, coordinación y herramientas a medida para arquitectura y gestión de proyectos, con experiencia también en pequeñas empresas.', 'Organisation, coordination and tailored tools for architecture and project management, with experience in small businesses too.'),
- 'consulting': ('Consultoría para organizar el trabajo de tu empresa: documentación, coordinación y herramientas a medida que encajan con tus procesos actuales.', 'Consulting to organise your business workflows: documentation, coordination and tailored tools that fit your existing processes.'),
- 'applications': ('Organización y herramientas a medida para arquitectura y gestores de proyectos. Experiencia también en pequeñas empresas y equipos de postventa.', 'Organisation and tailored tools for architecture practices and project managers. Experience also includes small businesses and after-sales teams.'),
- 'documents': ('Organización de documentación y procesos: criterios comunes, información localizable y pasos claros para preparar, revisar y compartir el trabajo.', 'Document and workflow organisation: shared standards, accessible information and clear steps for preparing, reviewing and sharing work.'),
- 'operations': ('Coordinación de actuaciones concretas: tareas, materiales, responsables y tiempos organizados para llevar una intervención a término.', 'Coordination of specific assignments: tasks, materials, responsibilities and timing organised to carry an intervention through.'),
- 'coordination': ('Apps a medida para presupuestos, facturas, gastos y consultas de proyectos, incluido seguimiento visual desde un plano para project managers.', 'Custom apps for quotations, invoices, expenses and project queries, including visual tracking from a drawing for project managers.'),
- 'integrations': ('Conexión de plataformas y automatizaciones para que la información circule entre las herramientas que ya utiliza tu empresa.', 'Platform integrations and automation that let information move between the tools your business already uses.'),
+ 'home': ('Organización de documentación, coordinación y herramientas de gestión a medida para despachos de arquitectura y project managers.', 'Document organisation, coordination and tailored management tools for architecture practices and project managers.'),
+ 'consulting': ('Consultoría para despachos de arquitectura y gestores de proyectos: documentación, coordinación y herramientas que encajan con sus procesos actuales.', 'Consulting for architecture practices and project managers: documentation, coordination and tools that fit their existing workflows.'),
+ 'applications': ('Soluciones para despachos de arquitectura y project managers: organizar información, coordinar actuaciones y crear herramientas de gestión a medida.', 'Solutions for architecture practices and project managers: organise information, coordinate assignments and build tailored management tools.'),
+ 'documents': ('Documentación y procesos para arquitectura: criterios comunes, información localizable y pasos claros para preparar, revisar y compartir el trabajo.', 'Documents and workflows for architecture: shared standards, accessible information and clear steps for preparing, reviewing and sharing work.'),
+ 'operations': ('Coordinación de actuaciones para arquitectura y project managers: tareas, materiales, responsables y tiempos organizados para una intervención concreta.', 'Coordination for architecture practices and project managers: tasks, materials, responsibilities and timing organised for a specific intervention.'),
+ 'coordination': ('Apps para arquitectura y project managers: presupuestos, facturas, gastos y consultas de proyectos, con seguimiento visual desde un plano.', 'Apps for architecture practices and project managers: quotations, invoices, expenses and project queries, with visual tracking from a drawing.'),
+ 'integrations': ('Automatizaciones y conexión de plataformas para despachos de arquitectura y project managers, a partir de las herramientas que ya utilizan.', 'Automation and platform integrations for architecture practices and project managers, built around the tools they already use.'),
  'value-retail': ('Caso real de Value Retail: análisis de planos existentes y definición de un estándar gráfico común para leer y compartir proyectos con clientes.', 'Value Retail case study: analysing existing drawings and establishing a shared graphic standard for reading and sharing projects with clients.'),
- 'about': ('Nicole Pereyra, fundadora de Orquivia. Organización del trabajo, coordinación de actuaciones y herramientas de gestión adaptadas a cada empresa.', 'Meet Nicole Pereyra, founder of Orquivia. Workflow organisation, coordination and management tools tailored to each business.'),
+ 'about': ('Nicole Pereyra, fundadora de Orquivia. Organización, coordinación y herramientas de gestión a medida para arquitectura y project managers.', 'Meet Nicole Pereyra, founder of Orquivia. Organisation, coordination and tailored management tools for architecture practices and project managers.'),
  'ideas': ('Ideas prácticas para arquitectura: automatizar altas, controlar documentación, conectar plataformas y diseñar apps para el seguimiento de proyectos.', 'Practical insights for architecture: automate intake, track documents, connect platforms and design apps for project tracking.'),
- 'contact': ('Cuéntanos qué necesitas organizar o gestionar en tu empresa. Primera conversación sobre documentación, coordinación o herramientas a medida.', 'Tell us what you need to organise or manage in your business. An initial conversation about documentation, coordination or tailored tools.'),
+ 'contact': ('Hablemos de la gestión de tu despacho o proyecto de arquitectura: documentación, coordinación y herramientas a medida para vuestro proceso.', 'Discuss the management of your architecture practice or project: documentation, coordination and tools tailored to your workflow.'),
  'legal': ('Identificación y datos de contacto de Orquivia Global SL, titular del sitio orquivia.com. Información legal sobre su actividad y el uso de la web.', 'Identity and contact details of Orquivia Global SL, owner of orquivia.com. Legal information about its activity and this website.'),
  'terms': ('Condiciones de uso de la web de Orquivia: consultas, propuestas de servicios, propiedad intelectual, enlaces y legislación aplicable.', 'Terms of use for the Orquivia website: enquiries, service proposals, intellectual property, links and applicable law.'),
  'cookies': ('Información sobre consultas, datos personales, derechos, proveedores y cookies en la web de Orquivia Global SL.', 'Information about enquiries, personal data, rights, providers and cookies on the Orquivia Global SL website.'),
 }
 SEO_TITLES = {
- 'home': ('Organización y herramientas de gestión a medida', 'Workflow organisation and tailored management tools'),
- 'consulting': ('Consultoría de organización y procesos', 'Organisation and process consulting'),
- 'applications': ('Organización y gestión para cada empresa', 'Organisation and management for each business'),
- 'documents': ('Organización de documentación y procesos', 'Document and workflow organisation'),
- 'operations': ('Coordinación de actuaciones y tareas', 'Coordination of assignments and tasks'),
- 'coordination': ('Apps y herramientas de gestión a medida', 'Custom apps and management tools'),
- 'integrations': ('Automatizaciones y conexión de plataformas', 'Automation and platform integrations'),
+ 'home': ('Consultoría de gestión para arquitectura', 'Management consulting for architecture'),
+ 'consulting': ('Consultoría para arquitectura y project managers', 'Consulting for architecture and project managers'),
+ 'applications': ('Soluciones para arquitectura y project managers', 'Solutions for architecture and project managers'),
+ 'documents': ('Documentación y procesos para arquitectura', 'Documents and workflows for architecture'),
+ 'operations': ('Coordinación operativa para arquitectura', 'Operational coordination for architecture'),
+ 'coordination': ('Apps de gestión para arquitectura y project managers', 'Management apps for architecture and project managers'),
+ 'integrations': ('Automatización e integraciones para arquitectura', 'Automation and integrations for architecture'),
  'about': ('Nicole Pereyra, fundadora de Orquivia', 'Nicole Pereyra, founder of Orquivia'),
  'ideas': ('Ideas de automatización y apps para arquitectura', 'Automation and app insights for architecture'),
- 'contact': ('Contacto y primera llamada de consultoría', 'Contact and initial consulting call'),
+ 'contact': ('Hablemos de tu despacho o proyecto de arquitectura', 'Discuss your architecture practice or project'),
 }
 
 def share_image(origin, lang):
@@ -48,7 +48,7 @@ def metadata(key, lang, routes, titles, articles, origin, indexable=False):
     canonical = page_url(origin, key, lang, routes)
     alternates = ''.join(f'<link rel="alternate" hreflang="{code}" href="{page_url(origin,key,i,routes)}">' for code,i in [('es',0),('en',1),('x-default',0)])
     robots = 'index, follow, max-image-preview:large' if indexable else 'noindex, nofollow'
-    image_alt = ('Orquivia · Organización, coordinación y herramientas a medida', 'Orquivia · Organisation, coordination and tailored tools')[lang]
+    image_alt = ('Orquivia · Organización, coordinación y herramientas para arquitectura', 'Orquivia · Organisation, coordination and tools for architecture')[lang]
     return f'''<title>{title}</title><meta name="description" content="{desc}"><meta name="robots" content="{robots}">
 <link rel="canonical" href="{canonical}">{alternates}
 <meta property="og:site_name" content="Orquivia"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:type" content="{'article' if key in articles else 'website'}"><meta property="og:url" content="{canonical}"><meta property="og:locale" content="{'es_ES' if lang==0 else 'en_GB'}"><meta property="og:locale:alternate" content="{'en_GB' if lang==0 else 'es_ES'}"><meta property="og:image" content="{image_url}"><meta property="og:image:alt" content="{image_alt}">
