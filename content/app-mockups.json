@@ -1,7 +1,7 @@
 [
   {
     "key": "queries",
-    "image": "app-consultas-demo-v1",
+    "image": "app-consultas-captura-v2",
     "title": [
       "Cada consulta, en su contexto.",
       "Every query, in context."
@@ -11,16 +11,16 @@
       "An application for creating and tracking queries visually from a drawing. The project provides the context for finding the follow-up."
     ],
     "alt": [
-      "Mockup anonimizado de una aplicación de consultas con zonas de proyecto ficticias",
-      "Anonymised query application mockup with fictional project zones"
+      "Interfaz de la aplicación de consultas sobre un plano con datos anonimizados",
+      "Drawing-based query application interface with anonymised data"
     ],
     "service": "coordination",
-    "width": 1536,
-    "height": 1024
+    "width": 1586,
+    "height": 992
   },
   {
     "key": "operations",
-    "image": "app-operaciones-demo-v1",
+    "image": "app-operaciones-captura-v2",
     "title": [
       "El trabajo y su avance, a la vista.",
       "The work and its progress, visible."
@@ -30,16 +30,16 @@
       "A tool for recording assignments and checking their status. Tracking fits the team’s sequence of work."
     ],
     "alt": [
-      "Mockup anonimizado de una aplicación de control de trabajos con actuaciones de muestra",
-      "Anonymised work tracking application mockup with sample assignments"
+      "Interfaz de la aplicación de control de trabajos con datos de muestra",
+      "Work tracking application interface with sample data"
     ],
     "service": "operations",
-    "width": 1536,
-    "height": 1024
+    "width": 1578,
+    "height": 996
   },
   {
     "key": "quotes",
-    "image": "app-presupuestos-demo-v1",
+    "image": "app-presupuestos-captura-v2",
     "title": [
       "De la gestión al documento.",
       "From management to the document."
@@ -49,11 +49,11 @@
       "Quotation preparation with a document preview. One of the applications developed to manage quotes, invoices and expenses."
     ],
     "alt": [
-      "Mockup de preparación de un presupuesto con cliente y documento de muestra sin datos reales",
-      "Quote preparation mockup with a sample client and document containing no real data"
+      "Interfaz de presupuestos con formulario y vista previa y datos de muestra",
+      "Quotation application interface with form and preview containing sample data"
     ],
     "service": "coordination",
-    "width": 1536,
-    "height": 1024
+    "width": 1586,
+    "height": 992
   }
 ]

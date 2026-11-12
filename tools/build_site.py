@@ -61,7 +61,7 @@ def photo(name, alt='', cls='', eager=False, diagram=False):
     if not diagram:
         item=PHOTOS[kind]
         description=item['alt'][LANG] if alt else ''
-        return f'<img class="{cls} editorial-photo photo-{kind}" src="assets/photography/{item["file"]}.webp" srcset="assets/photography/{item["file"]}-768.webp 768w, assets/photography/{item["file"]}.webp {item["width"]}w" sizes="{"100vw" if eager else "(max-width:800px) 100vw, 50vw"}" alt="{escape(description)}" width="{item["width"]}" height="{item["height"]}" {"fetchpriority=high" if eager else "loading=lazy"} decoding="async">'
+        return f'<img class="{cls} editorial-photo photo-{kind}" src="assets/photography/{item["file"]}.webp" srcset="assets/photography/{item["file"]}-768.webp 768w, assets/photography/{item["file"]}.webp {item["width"]}w" sizes="{"100vw" if eager else "(max-width:800px) 100vw, 75vw"}" alt="{escape(description)}" width="{item["width"]}" height="{item["height"]}" {"fetchpriority=high" if eager else "loading=lazy"} decoding="async">'
     description=t(*labels[kind]) if alt else ''
     return f'<img class="{cls} process-diagram" src="assets/diagrams/process-{kind}-{t("es","en")}.svg" alt="{escape(description)}" width="1536" height="1024" {"fetchpriority=high" if eager else "loading=lazy"} decoding="async">'
 
@@ -167,8 +167,8 @@ def home_service_value(key):
 
 def app_mockup(item, compact=False):
     image_name=item['image']
-    caption=t('Mockup adaptado de una app de Orquivia · Datos ficticios','Adapted mockup of an Orquivia application · Fictional data')
-    return f'<figure class="app-mockup {"compact-mockup" if compact else ""}"><div class="mockup-browser" aria-hidden="true"><i></i><i></i><i></i><span>ORQUIVIA / {t("VISTA DE MUESTRA","SAMPLE VIEW")}</span></div><img src="assets/mockups/{image_name}.webp" srcset="assets/mockups/{image_name}-768.webp 768w, assets/mockups/{image_name}.webp {item["width"]}w" sizes="(max-width:800px) 100vw, 55vw" alt="{escape(item["alt"][LANG])}" width="{item["width"]}" height="{item["height"]}" loading="lazy" decoding="async"><figcaption><span>{caption}</span><a class="mockup-expand" href="assets/mockups/{image_name}.webp" target="_blank" rel="noopener" aria-label="{t("Ampliar mockup","Enlarge mockup")}: {escape(item["title"][LANG])}">{t("Ampliar vista","Enlarge view")}{icon()}</a></figcaption></figure>'
+    caption=t('Interfaz de una app de Orquivia · Datos de muestra','Orquivia application interface · Sample data')
+    return f'<figure class="app-mockup {"compact-mockup" if compact else ""}"><img src="assets/mockups/{image_name}.webp" srcset="assets/mockups/{image_name}-768.webp 768w, assets/mockups/{image_name}-1280.webp 1280w, assets/mockups/{image_name}.webp {item["width"]}w" sizes="(max-width:800px) 100vw, 80vw" alt="{escape(item["alt"][LANG])}" width="{item["width"]}" height="{item["height"]}" loading="lazy" decoding="async"><figcaption>{caption}</figcaption></figure>'
 
 def app_showcase(keys, on_home=False):
     selected=[item for item in MOCKUPS if item['key'] in keys]
