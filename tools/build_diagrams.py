@@ -170,7 +170,7 @@ def sharing(lang):
     draw=ImageDraw.Draw(image)
     draw.text((84,62),'ORQUIVIA',font=font(55),fill=PAPER,stroke_width=0)
     draw.line((84,157,1116,157),fill='#5a6a6e',width=2)
-    lines=['Organización,','coordinación y','herramientas a medida.'] if lang=='es' else ['Organisation,','coordination and','tailored tools.']
+    lines=['Más control.','Más capacidad para','tu próximo proyecto.'] if lang=='es' else ['More control.','More capacity for','your next project.']
     y=208
     for label in lines:
         draw.text((84,y),label,font=font(58),fill=PAPER)

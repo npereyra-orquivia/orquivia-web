@@ -43,3 +43,5 @@ Los visuales son esquemas SVG bilingües: documentación, coordinación, herrami
 La oferta se resume en tres servicios. Los ejemplos se basan en trabajos descritos por Nicole y no atribuyen ahorros, ingresos ni funcionalidades no aportadas. La aplicación para project managers permite crear y seguir consultas visualmente desde un plano. La coordinación de actuaciones tiene una página propia: `gestion-operativa.html` / `operational-coordination.html`.
 
 El público comercial es despachos de arquitectura y project managers. Los otros negocios son experiencia previa, mencionada en Sobre Orquivia, y no segmentos de captación.
+
+La portada parte del beneficio para arquitectura y project managers: control del proyecto, avance de entregas y capacidad para nuevos encargos. Explica después los servicios y utiliza el caso de planos como experiencia concreta; no promete porcentajes de ahorro ni ingresos.

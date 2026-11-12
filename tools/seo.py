@@ -5,7 +5,7 @@ from xml.etree import ElementTree as ET
 import json
 
 DESCRIPTIONS = {
- 'home': ('Organización de documentación, coordinación y herramientas de gestión a medida para despachos de arquitectura y project managers.', 'Document organisation, coordination and tailored management tools for architecture practices and project managers.'),
+ 'home': ('Más control y capacidad para despachos de arquitectura y project managers. Procesos y herramientas para anticipar bloqueos y responder mejor al cliente.', 'More control and capacity for architecture practices and project managers. Workflows and tailored tools to anticipate blockers and keep clients informed.'),
  'consulting': ('Consultoría para despachos de arquitectura y gestores de proyectos: documentación, coordinación y herramientas que encajan con sus procesos actuales.', 'Consulting for architecture practices and project managers: documentation, coordination and tools that fit their existing workflows.'),
  'applications': ('Soluciones para despachos de arquitectura y project managers: organizar información, coordinar actuaciones y crear herramientas de gestión a medida.', 'Solutions for architecture practices and project managers: organise information, coordinate assignments and build tailored management tools.'),
  'documents': ('Documentación y procesos para arquitectura: criterios comunes, información localizable y pasos claros para preparar, revisar y compartir el trabajo.', 'Documents and workflows for architecture: shared standards, accessible information and clear steps for preparing, reviewing and sharing work.'),
@@ -21,7 +21,7 @@ DESCRIPTIONS = {
  'cookies': ('Información sobre consultas, datos personales, derechos, proveedores y cookies en la web de Orquivia Global SL.', 'Information about enquiries, personal data, rights, providers and cookies on the Orquivia Global SL website.'),
 }
 SEO_TITLES = {
- 'home': ('Consultoría de gestión para arquitectura', 'Management consulting for architecture'),
+ 'home': ('Más control y capacidad para arquitectura', 'More control and capacity for architecture'),
  'consulting': ('Consultoría para arquitectura y project managers', 'Consulting for architecture and project managers'),
  'applications': ('Soluciones para arquitectura y project managers', 'Solutions for architecture and project managers'),
  'documents': ('Documentación y procesos para arquitectura', 'Documents and workflows for architecture'),
