@@ -14,6 +14,11 @@ def copy_assets(source_root, destination):
             raw=a.get('src') if tag in ('img','script') else a.get('href') if tag=='link' and a.get('rel') in ('stylesheet','icon') else None
             if raw and not urlsplit(raw).scheme:
                 pending.append(source_root/urlsplit(raw).path)
+            if tag=='img':
+                for entry in a.get('srcset','').split(','):
+                    image_path=entry.strip().split(' ')[0]
+                    if image_path and not urlsplit(image_path).scheme:
+                        pending.append(source_root/urlsplit(image_path).path)
     for page in destination.glob('*.html'):
         Assets().feed(page.read_text(encoding='utf-8'))
     copied=set()

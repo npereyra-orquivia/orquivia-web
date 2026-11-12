@@ -15,6 +15,8 @@ class Page(HTMLParser):
         if tag=='h1':self.h1+=1
         if tag=='a':self.links.append(a.get('href',''))
         if tag in ('img','script'):self.assets.append(a.get('src',''))
+        if tag=='img':
+            self.assets.extend(entry.strip().split(' ')[0] for entry in a.get('srcset','').split(',') if entry.strip())
         if tag=='link' and a.get('rel') in ('stylesheet','icon'):self.assets.append(a.get('href',''))
 
 pages={p.name:Page(p.read_text(encoding='utf-8')) for p in ROOT.glob('*.html')}

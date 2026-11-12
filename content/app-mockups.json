@@ -1,0 +1,59 @@
+[
+  {
+    "key": "queries",
+    "image": "app-consultas-demo-v1",
+    "title": [
+      "Cada consulta, en su contexto.",
+      "Every query, in context."
+    ],
+    "description": [
+      "Una aplicación para crear y seguir consultas visualmente desde un plano. El proyecto como punto de partida para localizar el seguimiento.",
+      "An application for creating and tracking queries visually from a drawing. The project provides the context for finding the follow-up."
+    ],
+    "alt": [
+      "Mockup anonimizado de una aplicación de consultas con zonas de proyecto ficticias",
+      "Anonymised query application mockup with fictional project zones"
+    ],
+    "service": "coordination",
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "key": "operations",
+    "image": "app-operaciones-demo-v1",
+    "title": [
+      "El trabajo y su avance, a la vista.",
+      "The work and its progress, visible."
+    ],
+    "description": [
+      "Una herramienta para registrar actuaciones y consultar su estado. El seguimiento se adapta a la secuencia de trabajo del equipo.",
+      "A tool for recording assignments and checking their status. Tracking fits the team’s sequence of work."
+    ],
+    "alt": [
+      "Mockup anonimizado de una aplicación de control de trabajos con actuaciones de muestra",
+      "Anonymised work tracking application mockup with sample assignments"
+    ],
+    "service": "operations",
+    "width": 1536,
+    "height": 1024
+  },
+  {
+    "key": "quotes",
+    "image": "app-presupuestos-demo-v1",
+    "title": [
+      "De la gestión al documento.",
+      "From management to the document."
+    ],
+    "description": [
+      "Preparación de presupuestos con una vista previa del documento. Una de las aplicaciones desarrolladas para gestionar presupuestos, facturas y gastos.",
+      "Quotation preparation with a document preview. One of the applications developed to manage quotes, invoices and expenses."
+    ],
+    "alt": [
+      "Mockup de preparación de un presupuesto con cliente y documento de muestra sin datos reales",
+      "Quote preparation mockup with a sample client and document containing no real data"
+    ],
+    "service": "coordination",
+    "width": 1536,
+    "height": 1024
+  }
+]

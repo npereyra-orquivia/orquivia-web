@@ -1,6 +1,6 @@
 # Orquivia · Web bilingüe
 
-Sitio estático para organización de documentación y procesos, coordinación de actuaciones concretas y aplicaciones de gestión a medida. La experiencia incluye arquitectura, retail, project managers, pequeños negocios y equipos de postventa.
+Sitio estático para despachos de arquitectura y project managers: procesos y documentación, coordinación de actuaciones concretas y aplicaciones de gestión a medida. Las experiencias con pequeños negocios y equipos de postventa se mencionan como recorrido profesional en Sobre Orquivia.
 
 El dominio configurado en GitHub Pages es `orquivia.com`. Se conserva el archivo CNAME.
 
@@ -38,7 +38,9 @@ Añadir ese enlace HTTPS en `booking_url` de `content/site-settings.json` y reco
 
 La web no instala analítica ni publicidad. La privacidad describe el formulario, el correo de Arsys y los registros de seguridad de GitHub Pages. Si se añaden nuevas herramientas, revisar la política según el funcionamiento real.
 
-Los visuales son esquemas SVG bilingües: documentación, coordinación, herramientas de gestión, consultas sobre un plano y conexiones. Se regeneran con `python tools/build_diagrams.py` y no simulan fotografías ni pantallas de productos implantados. Se mantiene el retrato seleccionado de Nicole. El caso de Value Retail conserva su alcance real de consultoría y estandarización gráfica.
+Los servicios y artículos utilizan cinco escenas de trabajo ilustrativas generadas con ImageGen. Sus WebP y prompts están en `assets/photography/` y el mapa de uso en `content/photo-assets.json`. Las imágenes tienen variantes de 768 px para móvil y el pie identifica las escenas generadas. No se presentan como fotografías de clientes. Se mantiene el retrato seleccionado de Nicole. El caso de Value Retail conserva su esquema y su alcance real de consultoría y estandarización gráfica.
+
+Se muestran tres mockups adaptados de capturas de aplicaciones desarrolladas por Nicole: consultas sobre un plano, control de trabajos y preparación de presupuestos. ImageGen sustituyó todos los datos privados por contenido ficticio y cambió la geometría identificativa del recinto. Los originales privados no forman parte del sitio ni de este repositorio. Los WebP revisados y los prompts están en `assets/mockups/`; `content/app-mockups.json` define sus textos. Las vistas se identifican como mockups adaptados, se pueden ampliar y no atribuyen resultados comerciales a sus datos de muestra.
 
 La oferta se resume en tres servicios. Los ejemplos se basan en trabajos descritos por Nicole y no atribuyen ahorros, ingresos ni funcionalidades no aportadas. La aplicación para project managers permite crear y seguir consultas visualmente desde un plano. La coordinación de actuaciones tiene una página propia: `gestion-operativa.html` / `operational-coordination.html`.
 

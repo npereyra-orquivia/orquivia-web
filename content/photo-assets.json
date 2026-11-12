@@ -1,0 +1,65 @@
+{
+  "hero": {
+    "file": "consultoria-arquitectura-v3",
+    "alt": [
+      "Escena ilustrativa de una conversación de consultoría en un estudio de arquitectura",
+      "Illustrative consulting conversation in an architecture studio"
+    ],
+    "width": 1536,
+    "height": 1024
+  },
+  "documents": {
+    "file": "procesos-documentacion-v3",
+    "alt": [
+      "Escena ilustrativa de revisión y organización de documentación de un proyecto",
+      "Illustrative review and organisation of project documents"
+    ],
+    "width": 1536,
+    "height": 1024
+  },
+  "operations": {
+    "file": "coordinacion-proyectos-v3",
+    "alt": [
+      "Escena ilustrativa de coordinación de tiempos y participantes de un proyecto",
+      "Illustrative coordination of project timing and participants"
+    ],
+    "width": 1536,
+    "height": 1024
+  },
+  "queries": {
+    "file": "herramientas-gestion-v3",
+    "alt": [
+      "Escena ilustrativa de un project manager trabajando con una herramienta de seguimiento",
+      "Illustrative project manager working with a tracking tool"
+    ],
+    "width": 1536,
+    "height": 1024
+  },
+  "tools": {
+    "file": "herramientas-gestion-v3",
+    "alt": [
+      "Escena ilustrativa de herramientas de gestión para un equipo de arquitectura",
+      "Illustrative management tools for an architecture team"
+    ],
+    "width": 1536,
+    "height": 1024
+  },
+  "connections": {
+    "file": "analisis-conexiones-v3",
+    "alt": [
+      "Escena ilustrativa de análisis del recorrido de información entre procesos",
+      "Illustrative analysis of information moving between workflows"
+    ],
+    "width": 1536,
+    "height": 1024
+  },
+  "workflow": {
+    "file": "analisis-conexiones-v3",
+    "alt": [
+      "Escena ilustrativa de una sesión de análisis de procesos y coordinación",
+      "Illustrative workflow analysis and coordination session"
+    ],
+    "width": 1536,
+    "height": 1024
+  }
+}
