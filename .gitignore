@@ -1,0 +1,4 @@
+.publish/
+.qa/
+__pycache__/
+*.pyc

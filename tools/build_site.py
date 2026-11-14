@@ -1,0 +1,390 @@
+"""Build Orquivia's static, bilingual site. Run: python tools/build_site.py"""
+from pathlib import Path
+from html import escape
+import json
+import re
+import math
+import argparse
+import shutil
+import hashlib
+from seo import metadata, structured_data, sitemap
+from page_directory import render_directory
+from visual_components import workflow_figure
+
+ROOT = Path(__file__).resolve().parent.parent
+ROUTES = {
+    'value-retail': ('caso-value-retail.html', 'value-retail-case-study.html'),
+    'home': ('index.html', 'en.html'), 'consulting': ('consultoria.html', 'consulting.html'),
+    'applications': ('aplicaciones.html', 'applications.html'), 'about': ('sobre-nosotros.html', 'about-us.html'),
+    'ideas': ('ideas.html', 'insights.html'), 'contact': ('contacto.html', 'contact.html'),
+    'documents': ('documentacion.html', 'documents.html'), 'coordination': ('coordinacion.html', 'coordination.html'),
+    'integrations': ('integraciones.html', 'integrations.html'),
+    'operations': ('gestion-operativa.html', 'operational-coordination.html'),
+    'article-process': ('antes-de-elegir-herramientas.html', 'before-choosing-tools.html'),
+    'article-step': ('un-cambio-que-encaja.html', 'a-change-that-fits.html'),
+    'legal': ('aviso-legal.html', 'legal-notice.html'), 'terms': ('terminos-condiciones.html', 'terms-and-conditions.html'),
+    'cookies': ('politica-cookies.html', 'cookies-policy.html'),
+    'site-map': ('mapa-web.html', 'site-map.html'),
+}
+LANG = 0
+SETTINGS = json.loads((ROOT / 'content/site-settings.json').read_text(encoding='utf-8'))
+INDEXABLE = False
+PHOTOS = json.loads((ROOT / 'content/photo-assets.json').read_text(encoding='utf-8'))
+MOCKUPS = json.loads((ROOT / 'content/app-mockups.json').read_text(encoding='utf-8'))
+VISUAL_STORIES = json.loads((ROOT / 'content/visual-stories.json').read_text(encoding='utf-8'))
+
+ARTICLES = {}
+for content_file in sorted((ROOT / 'content').glob('ideas-*.json')):
+    for item in json.loads(content_file.read_text(encoding='utf-8')):
+        if item['key'] in ARTICLES:
+            raise ValueError(f'Duplicate article: {item["key"]}')
+        item['image'] = {'documents':'automatizacion-documental-v2','coordination':'app-seguimiento-v2','integrations':'plataformas-conectadas-v2'}.get(item['solution'], item['image'])
+        ARTICLES[item['key']] = item
+        ROUTES[item['key']] = tuple(item['routes'])
+
+ARTICLE_ORDER = ['article-onboarding', 'article-status', 'article-app', 'article-documents', 'article-changes', 'article-milestone', 'article-process', 'article-step']
+
+def article_keys():
+    return [key for key in ARTICLE_ORDER if key in ARTICLES]
+
+def reading_minutes(item):
+    text = ' '.join([item['title'][LANG], item['lead'][LANG], item['question'][LANG]] + [section['heading'][LANG] + ' ' + ' '.join(p[LANG] for p in section['paragraphs']) for section in item['sections']])
+    return max(1, math.ceil(len(re.findall(r'\b\w+\b', text)) / 180))
+def t(es, en): return (es, en)[LANG]
+def url(key): return ROUTES[key][LANG]
+def icon(name='arrow-up-right'): return f'<img class="icon" src="assets/icons/{name}.svg" alt="" aria-hidden="true" width="24" height="24">'
+def photo(name, alt='', cls='', eager=False, diagram=False):
+    kind={'hero':'hero','documents':'documents','automatizacion-documental-v2':'documents','time':'operations','operations':'operations','app-seguimiento-v2':'queries','queries':'queries','tools':'tools','connections':'connections','plataformas-conectadas-v2':'connections'}.get(name,'workflow')
+    labels={
+      'documents':('Esquema: criterios compartidos para organizar y consultar documentación','Diagram: shared standards for organising and finding documents'),
+      'operations':('Esquema: preparación, coordinación y entrega de una actuación','Diagram: preparing, coordinating and delivering a specific project'),
+      'tools':('Esquema: presupuestos, facturas y gastos en una herramienta de gestión','Diagram: quotes, invoices and expenses in a management tool'),
+      'queries':('Esquema: seguimiento visual de consultas sobre un plano','Diagram: visual query tracking on a drawing'),
+      'connections':('Esquema: información que pasa entre herramientas con una validación','Diagram: information moving between tools with a validation step'),
+      'workflow':('Esquema: documentación, coordinación y herramientas conectadas','Diagram: connected documentation, coordination and tools')}
+    if not diagram:
+        item=PHOTOS[kind]
+        description=item['alt'][LANG] if alt else ''
+        return f'<img class="{cls} editorial-photo photo-{kind}" src="assets/photography/{item["file"]}.webp" srcset="assets/photography/{item["file"]}-768.webp 768w, assets/photography/{item["file"]}.webp {item["width"]}w" sizes="{"100vw" if eager else "(max-width:800px) 100vw, 75vw"}" alt="{escape(description)}" width="{item["width"]}" height="{item["height"]}" {"fetchpriority=high" if eager else "loading=lazy"} decoding="async">'
+    description=t(*labels[kind]) if alt else ''
+    return f'<img class="{cls} process-diagram" src="assets/diagrams/process-{kind}-{t("es","en")}.svg" alt="{escape(description)}" width="1536" height="1024" {"fetchpriority=high" if eager else "loading=lazy"} decoding="async">'
+
+def button(text, href, cls='gold', arrow='arrow-up-right'):
+    return f'<a class="button {cls}" href="{href}"><span>{text}</span>{icon(arrow)}</a>'
+def eyebrow(text): return f'<p class="eyebrow">{text}</p>'
+def header(key):
+    nav = [('consulting',t('Consultoría','Consulting')),('applications',t('Para quién','Who it’s for')),('value-retail',t('Caso real','Case study')),('about',t('Sobre Orquivia','About Orquivia')),('ideas',t('Ideas','Insights'))]
+    links=''.join(f'<a href="{url(k)}" {"aria-current=\"page\"" if k==key else ""}>{label}</a>' for k,label in nav)
+    return f'''<a class="skip-link" href="#main">{t('Saltar al contenido','Skip to content')}</a>
+    <header class="header" data-header><div class="nav-pill"><a class="brand" href="{url('home')}" aria-label="Orquivia · {t('Inicio','Home')}"><img src="assets/logo-completo.svg" alt="Orquivia" width="157" height="40"></a>
+    <nav class="desktop-nav" aria-label="{t('Navegación principal','Main navigation')}">{links}</nav>
+    <a class="language-link" href="{ROUTES[key][1-LANG]}" lang="{t('en','es')}" hreflang="{t('en','es')}" aria-label="{t('View this page in English','Ver esta página en español')}">{t('EN','ES')}</a>
+    <button class="menu-toggle" type="button" aria-label="{t('Abrir menú','Open menu')}" aria-expanded="false" aria-controls="mobile-menu">{icon('list')}</button></div>
+    {button(t('Hablemos','Let’s talk'),url('contact'),'header-cta gold')}</header>
+    <dialog id="mobile-menu" class="mobile-menu"><div class="menu-top"><img src="assets/logo-completo.svg" alt="Orquivia" width="157" height="40"><button class="menu-close" aria-label="{t('Cerrar menú','Close menu')}">{icon('x')}</button></div><nav aria-label="{t('Navegación móvil','Mobile navigation')}">{links}<a href="{url('contact')}">{t('Hablemos','Let’s talk')}</a></nav><a class="menu-email" href="mailto:info@orquivia.com">info@orquivia.com</a></dialog>'''
+def footer():
+    return f'''<footer class="footer"><div class="footer-top"><div>{eyebrow(t('Hablemos del proceso detrás del proyecto','Let’s talk about the process behind the project'))}<h2>{t('Tu trabajo, con orden.<br>Tu siguiente paso, más claro.','Your work, organised.<br>Your next step, clearer.')}</h2>{button(t('Conversemos sobre tu caso','Let’s discuss your situation'),url('contact'),'gold')}</div><div class="footer-contact"><p>{t('Procesos y herramientas a medida para arquitectura y project managers.<br>Nicole Pereyra · Founder<br>Barcelona.','Tailored processes and tools for architecture practices and project managers.<br>Nicole Pereyra · Founder<br>Barcelona.')}</p><a href="mailto:info@orquivia.com">info@orquivia.com {icon()}</a><a href="tel:+34681854094">+34 681 854 094</a></div></div>
+    <div class="footer-nav"><nav aria-label="{t('Enlaces de pie de página','Footer links')}"><a href="{url('consulting')}">{t('Consultoría','Consulting')}</a><a href="{url('applications')}">{t('Para quién','Who it’s for')}</a><a href="{url('value-retail')}">{t('Caso real','Case study')}</a><a href="{url('about')}">{t('Sobre Orquivia','About Orquivia')}</a><a href="{url('ideas')}">{t('Ideas','Insights')}</a></nav><a href="#top" class="back-top">{t('Volver arriba','Back to top')}{icon()}</a></div>
+    <div class="footer-legal"><div><small>© 2026 Orquivia Global SL</small><p class="image-credit">{t("Escenas de trabajo ilustrativas generadas con IA.","Illustrative working scenes generated with AI.")}</p></div><nav aria-label="{t('Información legal','Legal information')}"><a href="{url('legal')}">{t('Aviso legal','Legal notice')}</a><a href="{url('terms')}">{t('Condiciones','Terms')}</a><a href="{url('cookies')}">{t('Privacidad y cookies','Privacy & cookies')}</a><a href="{url('site-map')}">{t('Mapa web','Site map')}</a></nav></div>
+    </footer>'''
+
+
+def end_cta(on_home=False):
+    if on_home:
+        return f'''<section class="invite section"><div>{eyebrow(t("Una primera mejora, con un objetivo claro","One first improvement, with a clear goal"))}<h2 class="reveal">{t("¿Qué está limitando<br>tu próximo proyecto?","What is holding back<br>your next project?")}</h2></div><div class="invite-copy"><p>{t("En 15 minutos situamos un proceso del despacho o del proyecto y el resultado que necesitas mejorar. A partir de ahí, proponemos el siguiente paso.","In 15 minutes, we identify one practice or project workflow and the outcome you need to improve. From there, we propose the next step.")}</p>{button(t("Conversemos sobre tu proyecto","Let’s discuss your project"),url("contact"),"ink")}</div></section>'''
+    return f'''<section class="invite section"><div>{eyebrow(t('Empezamos por escucharte','We start by listening'))}<h2 class="reveal">{t('¿Qué te gustaría<br>hacer posible?','What would you like<br>to make possible?')}</h2></div><div class="invite-copy"><p>{t('En 15 minutos situamos una tarea concreta y el resultado que buscas. No hace falta preparar una presentación ni explicar toda tu empresa.','In 15 minutes, we identify one task and the outcome you want. No presentation or full company walkthrough needed.')}</p>{button(t('Exploremos tu proyecto','Let’s explore your project'),url('contact'),'ink')}</div></section>'''
+def intro(over,title,description,image='process',compact=False):
+    return f'<section class="page-hero text-hero {"compact" if compact else ""}"><div class="page-hero-copy">{eyebrow(over)}<h1 data-enter>{title}</h1><p data-enter>{description}</p></div><span class="page-hero-index">ORQUIVIA / {t("DEL TRABAJO REAL A LA SOLUCIÓN","FROM REAL WORK TO A SOLUTION")}</span></section>'
+
+def method(on_consulting=False):
+    phases=[
+        (t('Entender','Understand'),t('Tu punto de partida.','Your starting point.'),t('Escuchamos a las personas que conocen el proceso. Identificamos qué funciona, dónde se acumulan esperas y qué impacto tienen.','We listen to the people who know the process. We identify what works, where delays build up and their impact.')),
+        (t('Priorizar','Prioritise'),t('Un objetivo medible.','A measurable goal.'),t('Proponemos dónde actuar primero y qué resultado debe mejorar: una entrega, el seguimiento o la gestión. Definimos el alcance antes de empezar.','We propose where to act first and which outcome should improve: delivery, follow-up or management. We define the scope before starting.')),
+        (t('Diseñar','Design'),t('El cambio que encaja.','The change that fits.'),t('Organizamos la documentación, preparamos la coordinación o desarrollamos la herramienta para el alcance elegido. Probamos el recorrido antes de ampliarlo.','We organise documents, prepare coordination or develop the tool for the chosen scope. We test the workflow before extending it.')),
+        (t('Comprobar','Verify'),t('Una solución que funciona.','A solution that works.'),t('Contrastamos el resultado con la situación inicial, corregimos incidencias y entregamos documentación y formación para utilizar la solución en el día a día.','We compare the result with the starting point, resolve issues and provide documentation and training for day-to-day use.')),
+    ]
+    rows=''.join(f'<article class="method-step reveal"><span class="step-number">0{i+1}</span><div><p class="eyebrow">{a}</p><h3>{b}</h3><p>{c}</p></div></article>' for i,(a,b,c) in enumerate(phases))
+    return f'''<section class="section method {"method-overview" if on_consulting else ""}" id="metodo"><div class="method-heading">{eyebrow(t('Cómo trabajamos','How we work'))}<h2>{t('Un cambio que encaja.<br>Un avance que se nota.','A change that fits.<br>Progress you can see.')}</h2><p>{t('Entendemos cómo se trabaja, proponemos una intervención concreta y la llevamos a la práctica. Conservamos lo que funciona y comprobamos el resultado del cambio.','We understand how work happens, propose a specific intervention and put it into practice. We keep what works and check the result of the change.')}</p>{button(t('Cuéntanos el proceso','Tell us about the process'),url('contact'),'text-link') if on_consulting else button(t('Conoce nuestra consultoría','Explore our consulting'),url('consulting'),'text-link')}</div><div class="method-steps">{rows}</div></section>'''
+def service_data():
+    return [
+      ('documents','documents',t('Procesos y documentación','Processes & documents'),t('La información en orden.<br>Un criterio compartido.','Organised information.<br>One shared standard.'),t('Organizamos la documentación del despacho y definimos criterios para encontrarla, utilizarla y compartirla. Desde los planos de un proyecto hasta los documentos que necesita una entrega.','We organise practice documents and establish standards for finding, using and sharing them. From project drawings to the documents needed for a delivery.'),[t('Documentación organizada','Organised documents'),t('Criterios comunes','Shared standards'),t('Pasos claros','Clear steps')]),
+      ('operations','operations',t('Coordinación de actuaciones','Project coordination'),t('Lo que tiene que pasar.<br>En el orden que necesita.','What needs to happen.<br>In the right order.'),t('Coordinamos actuaciones concretas dentro de un proyecto: qué hace falta, quién interviene y cómo encajan los tiempos. Un alcance definido para llevar el trabajo hasta la entrega.','We coordinate specific assignments within a project: what is needed, who is involved and how the timing fits. A defined scope that takes the work through to delivery.'),[t('Preparación','Preparation'),t('Recursos y tiempos','Resources & timing'),t('Seguimiento','Follow-up')]),
+      ('coordination','queries',t('Aplicaciones a medida','Custom applications'),t('La herramienta se adapta<br>a tu forma de trabajar.','Tools that fit<br>the way you work.'),t('Creamos apps para la gestión del despacho y el seguimiento de proyectos: presupuestos, gastos o consultas visuales desde un plano. Automatizamos pasos y conectamos las plataformas que utiliza tu equipo.','We build apps for practice management and project tracking: quotes, expenses or visual queries on a drawing. We automate steps and connect the platforms your team uses.'),[t('Gestión del despacho','Practice management'),t('Consultas de proyectos','Project queries'),t('Automatizaciones y conexiones','Automation & integrations')]),
+      ('integrations','connections',t('Automatizaciones y conexiones','Automation & integrations'),t('El dato ya está.<br>Que no vuelva a copiarse.','The data is already there.<br>No need to copy it again.'),t('Conectamos las herramientas del despacho y del equipo de proyecto para que la información circule entre ellas. Comprobamos las posibilidades de cada plataforma antes de proponer la integración.','We connect practice and project team tools so information can move between them. We check each platform’s capabilities before proposing an integration.'),[t('Datos conectados','Connected data'),t('Validaciones','Validation'),t('Menos pasos repetidos','Fewer repeated steps')]),
+    ]
+
+def services(on_home=False):
+    cards=''
+    for i,(key,img,label,title,desc,tags) in enumerate(x for x in service_data() if x[0]!='integrations'):
+        if on_home:
+            title,desc=home_service_value(key)
+        cards+=f'<article class="service-card" style="--order:{i}"><div class="service-copy"><div class="service-top"><span>{label}</span><span>0{i+1}</span></div><h3>{title}</h3><p>{desc}</p><ul>{"".join(f"<li>{x}</li>" for x in tags)}</ul>{button(t("Ver este servicio","Explore this service"),url(key),"ink")}</div><div class="service-photo">{photo(img,label)}</div></article>'
+    return f'<section class="services section" id="servicios"><div class="section-heading"><div>{eyebrow(t("Qué hacemos","What we do"))}<h2>{t("Del resultado que buscas<br>a una solución concreta.","From the outcome you need<br>to a practical solution.") if on_home else t("Organizar. Coordinar.<br>Crear la herramienta.","Organise. Coordinate.<br>Build the right tool.")}</h2></div><p>{t("Tres servicios para el trabajo del despacho y la gestión de proyectos de arquitectura. Partimos de una necesidad concreta y del resultado que debe mejorar.","Three services for architecture practices and project management. We start with a specific need and the outcome that should improve.")}</p></div><div class="service-stack">{cards}</div></section>'
+
+def use_cases(only=None):
+    examples=[
+      ('documents',t('Documentación que se puede compartir.','Documents ready to share.'),t('Hemos ordenado planos de distintos proyectos y establecido un criterio común para consultarlos y compartirlos.','We have organised drawings from different projects and established a shared standard for reading and sharing them.'),'value-retail'),
+      ('operations',t('Una actuación que llega a la entrega.','A specific project, through to delivery.'),t('Hemos coordinado la colocación de materiales con un plazo de ejecución muy ajustado, organizando los recursos y la secuencia de trabajo.','We have coordinated material installation within a tight delivery window, organising resources and the sequence of work.'),'operations'),
+      ('coordination',t('Herramientas que nacen del trabajo real.','Tools built around real work.'),t('Hemos creado una aplicación para que project managers creen y sigan las consultas de un proyecto de forma visual desde un plano.','We have built an application for project managers to create and track project queries visually from a drawing.'),'coordination')]
+    if only=='integrations':
+        return ''
+    shown=[x for x in examples if not only or x[0]==only]
+    cards=''.join(f'<article class="experience-card"><span class="eyebrow">0{i+1}</span><h3>{a}</h3><p>{b}</p>{button(t("Ver el caso real" if destination=="value-retail" else "Ver el enfoque","View the case study" if destination=="value-retail" else "Explore the approach"),url(destination),"text-link")}</article>' for i,(_,a,b,destination) in enumerate(shown))
+    return f'<section class="section use-cases" id="ejemplos"><div class="section-heading"><div>{eyebrow(t("Experiencia aplicada","Applied experience"))}<h2 data-scroll-words>{t("Trabajos distintos.<br>La misma atención al proceso.","Different work.<br>The same care for the process.")}</h2></div><p>{t("Documentación de arquitectura y retail, coordinación de actuaciones y seguimiento visual de consultas para project managers. Experiencia que da forma a nuestros servicios.","Architecture and retail documentation, project coordination and visual query tracking for project managers. Experience that shapes our services.")}</p></div><div class="experience-grid {"single" if only else ""}">{cards}</div></section>'
+
+def faqs():
+    groups={
+      t('Enfoque','Approach'):[
+        (t('¿Asumís la gestión de nuestra empresa?','Do you take over managing our business?'),t('Trabajamos sobre un alcance concreto: organizar documentación, coordinar una actuación o crear una herramienta. La dirección de la empresa sigue en vuestro equipo; las responsabilidades de cada intervención quedan definidas en la propuesta.','We work on a defined scope: organising documents, coordinating a specific project or building a tool. Your team continues to lead the business; responsibilities for each engagement are defined in the proposal.')),
+        (t('¿Para qué equipos está pensada la consultoría?','Which teams is the consulting designed for?'),t('Nos dirigimos a despachos de arquitectura y project managers que necesitan organizar documentación, coordinar actuaciones o disponer de herramientas de gestión adaptadas a sus proyectos.','We work with architecture practices and project managers who need to organise documents, coordinate specific projects or use management tools designed around their work.')),
+        (t('¿Tenemos que cambiar nuestras herramientas?','Do we need to change our tools?'),t('Primero comprobamos qué pueden hacer las herramientas actuales y dónde falta una conexión o un flujo. Proponemos una app a medida cuando el proceso necesita funciones que esas herramientas no cubren.','We first check what existing tools can do and where a connection or workflow is missing. We propose a custom app when the process needs functions those tools do not cover.'))],
+      t('Colaboración','Working together'):[
+        (t('¿Cómo empieza la colaboración?','How does a collaboration start?'),t('Con una conversación breve sobre vuestra situación y el resultado que buscáis. Si encaja, concretamos un alcance, las personas implicadas y una propuesta antes de iniciar el trabajo.','With a short conversation about your situation and the outcome you want. If there is a fit, we define scope, participants and a proposal before starting work.')),
+        (t('¿Estáis presentes en nuestra empresa cada día?','Will you be at our business every day?'),t('El trabajo se organiza por fases de análisis, desarrollo, pruebas y puesta en marcha. La propuesta detalla las sesiones necesarias y las personas que participan.','Work follows analysis, development, testing and rollout stages. The proposal details the sessions needed and who participates.'))],
+      t('Alcance y resultados','Scope & outcomes'):[
+        (t('¿Cuánto cuesta y cuánto dura?','How much does it cost and how long does it take?'),t('Depende del proceso, las herramientas y el alcance. Tras la conversación inicial proponemos fases, entregables, calendario y presupuesto. Cualquier continuidad se acuerda por separado.','It depends on the process, tools and scope. After the initial conversation we propose phases, deliverables, a schedule and a fee. Any ongoing support is agreed separately.')),
+        (t('¿Cómo sabemos si está funcionando?','How do we know it is working?'),t('Registramos el punto de partida y comprobamos indicadores del proceso: plazo de respuesta, esperas, tareas repetidas o tiempo hasta una entrega. Cuando el hito condiciona la facturación, también observamos ese recorrido. Los resultados se contrastan con datos del despacho.','We record the starting point and check process measures: response time, waits, repeated tasks or time to delivery. When a milestone affects billing, we also examine that workflow. Results are checked against practice data.')),
+        (t('¿Qué queda en nuestro equipo al terminar?','What stays with our team afterwards?'),t('La solución implementada, su documentación y la formación incluida en la propuesta. El mantenimiento y las futuras ampliaciones se detallan por separado.','The implemented solution, its documentation and the training included in the proposal. Maintenance and future extensions are detailed separately.'))]
+    }
+    tabs=''.join(f'<button role="tab" id="faq-tab-{i}" aria-controls="faq-panel-{i}" aria-selected="{str(i==0).lower()}" tabindex="{0 if i==0 else -1}" data-faq-tab="{i}">{label}</button>' for i,label in enumerate(groups))
+    panels=''
+    for i,items in enumerate(groups.values()):
+        rows=''.join(f'<details><summary>{q}{icon("plus")}</summary><div><p>{a}</p></div></details>' for q,a in items)
+        panels+=f'<div role="tabpanel" id="faq-panel-{i}" aria-labelledby="faq-tab-{i}" {"hidden" if i else ""}>{rows}</div>'
+    return f'<section class="faq section" id="faq"><div>{eyebrow(t("Antes de conversar","Before we talk"))}<h2>{t("Todo un poco<br>más claro.","A little more<br>clarity.")}</h2><p>{t("¿Otra pregunta?","Another question?")}<br><a class="underlined" href="mailto:info@orquivia.com">info@orquivia.com</a></p></div><div class="faq-body"><div class="tabs" role="tablist" aria-label="{t("Temas de preguntas","Question topics")}">{tabs}</div>{panels}</div></section>'
+def ideas_cards(keys=None):
+    cards = []
+    for key in article_keys() if keys is None else keys:
+        item = ARTICLES[key]
+        title = escape(item['title'][LANG])
+        summary = escape(item['summary'][LANG])
+        category = escape(item['category'][LANG])
+        minutes = reading_minutes(item)
+        cards.append(f'<a class="article-card" href="{url(key)}"><div class="image-zoom">{photo(item["image"],item["title"][LANG])}</div><div class="article-meta"><span>{category}</span><span>{t("Lectura ·","Read ·")} {minutes} min</span></div><h3>{title}{icon()}</h3><p class="article-summary">{summary}</p></a>')
+    return ''.join(cards)
+def home_service_value(key):
+    return {
+      'documents':(t('La información disponible.<br>La entrega puede avanzar.','Information at hand.<br>Delivery can move forward.'),t('Organizamos documentos y criterios para que preparar una entrega o responder una consulta no exija buscar desde cero. Una base clara para compartir información y continuar el proyecto.','We organise documents and standards so preparing a delivery or answering a query does not mean searching from scratch. A clear foundation for sharing information and moving the project forward.')),
+      'operations':(t('Una secuencia clara.<br>Menos bloqueos entre pasos.','A clear sequence.<br>Fewer blockers between steps.'),t('Coordinamos actuaciones concretas con pasos, recursos y tiempos definidos. El objetivo es que cada participante sepa qué necesita para avanzar hacia la entrega acordada.','We coordinate specific assignments with defined steps, resources and timing. The aim is for each participant to know what they need to move towards the agreed delivery.')),
+      'coordination':(t('Tu gestión conectada.<br>Más capacidad de respuesta.','Connected workflows.<br>More capacity to respond.'),t('Creamos apps para consultas, presupuestos y seguimiento, y conectamos herramientas para evitar repetir los mismos datos. Información utilizable para decidir y responder, adaptada a cómo trabaja tu equipo.','We build apps for queries, quotes and tracking, and connect tools to avoid repeating the same data. Usable information for decisions and responses, designed around how your team works.'))
+    }[key]
+
+def app_mockup(item, compact=False):
+    image_name=item['image']
+    caption=t('Interfaz de una app de Orquivia · Datos de muestra','Orquivia application interface · Sample data')
+    if item['key']=='queries':
+        caption=t('Interfaz adaptada de una app de Orquivia · Plano ficticio y datos de muestra','Adapted Orquivia application interface · Fictional floor plan and sample data')
+    return f'<figure class="app-mockup {"compact-mockup" if compact else ""}"><img src="assets/mockups/{image_name}.webp" srcset="assets/mockups/{image_name}-768.webp 768w, assets/mockups/{image_name}-1280.webp 1280w, assets/mockups/{image_name}.webp {item["width"]}w" sizes="(max-width:800px) 100vw, 80vw" alt="{escape(item["alt"][LANG])}" width="{item["width"]}" height="{item["height"]}" loading="lazy" decoding="async"><figcaption>{caption}</figcaption></figure>'
+
+def app_showcase(keys, on_home=False):
+    selected=[item for item in MOCKUPS if item['key'] in keys]
+    cards=''.join(f'<article class="app-proof-card">{app_mockup(item)}<div class="app-proof-copy"><h3>{escape(item["title"][LANG])}</h3><p>{escape(item["description"][LANG])}</p>{button(t("Ver el servicio","Explore the service"),url(item["service"]),"text-link") if on_home else ""}</div></article>' for item in selected)
+    title=t('Herramientas nacidas<br>de necesidades reales.','Tools built<br>around real needs.')
+    description=t('Aplicaciones desarrolladas para seguir consultas, coordinar trabajos y preparar documentos de gestión. Vistas de muestra adaptadas para proteger la información de cada proyecto.','Applications developed to track queries, coordinate work and prepare management documents. Sample views adapted to protect each project’s information.')
+    return f'<section class="section app-showcase" id="{t("ejemplos","examples") if on_home else "aplicaciones-desarrolladas"}"><div class="section-heading"><div>{eyebrow(t("Aplicaciones desarrolladas","Applications we have built"))}<h2 data-scroll-words>{title}</h2></div><p>{description}</p></div><div class="app-proof-grid {"single" if len(selected)==1 else ""}">{cards}</div></section>'
+
+def home_experience():
+    return app_showcase(['queries','operations'],on_home=True)
+
+def value_comparison():
+    pairs=[
+      (t('Buscar en correos y hojas antes de responder al cliente.','Searching emails and spreadsheets before answering a client.'),t('Información y pendientes a la vista para responder con claridad.','Information and outstanding items in view for clear answers.')),
+      (t('Copiar el mismo dato en varias herramientas.','Copying the same information into several tools.'),t('Herramientas conectadas para evitar introducir el dato de nuevo.','Connected tools that avoid entering the same information again.')),
+      (t('Detectar lo que falta cuando la entrega ya aprieta.','Finding out what is missing as the deadline approaches.'),t('Estados y responsables visibles para anticipar lo pendiente.','Visible statuses and owners to spot outstanding work earlier.')),
+      (t('Repetir la preparación y el seguimiento en cada encargo.','Repeating setup and follow-up for every commission.'),t('Procesos reutilizables para asumir el siguiente proyecto.','Reusable workflows to take on the next project.')),
+    ]
+    before=''.join(f'<li><span class="comparison-icon" aria-hidden="true">{icon("x")}</span><span>{loss}</span></li>' for loss,_ in pairs)
+    after=''.join(f'<li><span class="comparison-icon" aria-hidden="true">{icon("check")}</span><span>{gain}</span></li>' for _,gain in pairs)
+    return f'''<section class="section approach" id="enfoque" aria-labelledby="comparison-title"><div class="section-heading comparison-heading"><div>{eyebrow(t('El cambio para tu despacho','The change for your practice'))}<h2 id="comparison-title" data-scroll-words>{t('Lo que cambia<br>con Orquivia.','What changes<br>with Orquivia.')}</h2></div><p>{t('Si coordinar exige buscar, copiar y preguntar, queda menos capacidad para preparar entregas y responder al cliente.','If coordination means searching, copying and asking, less capacity remains for preparing deliverables and responding to clients.')}</p></div><div class="comparison-scene"><div class="comparison"><article class="comparison-card current"><p class="eyebrow comparison-label">{t('Antes · Seguimiento manual','Before · Manual follow-up')}</p><h3>{t('Más seguimiento.<br>Menos capacidad.','More follow-up.<br>Less capacity.')}</h3><ul>{before}</ul></article><article class="comparison-card future"><p class="eyebrow comparison-label">{t('Con Orquivia','With Orquivia')}</p><h3>{t('Más control.<br>Capacidad para crecer.','More control.<br>Room for the next project.')}</h3><ul>{after}</ul></article></div></div><div class="comparison-next">{button(t('Dónde puede empezar el cambio','Where the change can start'),'#servicios','text-link')}</div></section>'''
+
+
+def home():
+    return f'''<section class="hero-story" id="inicio" aria-label="{t('Nuestra propuesta','Our approach')}"><div class="hero-stage">{photo('hero','','hero-background photo-hero',True)}<div class="hero-scrim"></div><div class="hero-first"><div class="hero-copy">{eyebrow(t('Consultoría para arquitectura y project managers','Consulting for architecture practices & project managers'))}<h1 data-enter>{t('Más control.<br>Más capacidad<br>para tu próximo proyecto.','More control.<br>More capacity<br>for your next project.')}</h1><p data-enter>{t('Procesos y herramientas para anticipar bloqueos, responder al cliente con información clara y asumir nuevos encargos con menos seguimiento manual. Partimos de cómo trabaja tu equipo.','Workflows and tools to anticipate blockers, give clients clear answers and take on new commissions with less manual follow-up. We start with how your team works.')}</p><div class="hero-actions" data-enter>{button(t('Conversemos sobre tu proyecto','Let’s discuss your project'),url('contact'),'gold','arrow-right')}{button(t('Qué puede cambiar','What can change'),'#enfoque','glass','arrow-down')}</div></div><div class="hero-bottom"><a class="scroll-note" href="#enfoque">{icon('arrow-down')}<span>{t('Tu equipo conoce el proyecto.<br>La información debe acompañarlo.','Your team knows the project.<br>The information should keep up.')}</span></a><a class="hero-feature" href="#enfoque"><span><small>{t('EL RESULTADO QUE BUSCAMOS','THE OUTCOME WE AIM FOR')}</small>{t('Control del proyecto.<br>Capacidad del equipo.','Project control.<br>Team capacity.')}{icon()}</span></a></div></div><div class="hero-second" aria-hidden="true"><p data-hero-words>{t('El siguiente paso empieza<br>por entender dónde estás.','The next step starts<br>with understanding where you are.')}</p><span>{t('TU TRABAJO · EL PROCESO · LA SOLUCIÓN','YOUR WORK · THE PROCESS · THE SOLUTION')}</span></div></div></section>
+    {value_comparison()}
+    {services(on_home=True)}{home_experience()}{case_teaser()}{method()}{founder(True)}
+    <section class="section applications-teaser"><div class="section-heading"><div>{eyebrow(t('Para quién','Who it’s for'))}<h2 data-scroll-words>{t('Despachos de arquitectura.<br>Project managers.','Architecture practices.<br>Project managers.')}</h2></div><p>{t('Para quienes dirigen un despacho de arquitectura o coordinan sus proyectos y necesitan controlar el avance, responder con claridad y ampliar capacidad. La mejora se adapta a los procesos y herramientas que ya utiliza el equipo.','For architecture practice leaders and project managers who need to track progress, give clear answers and expand capacity. Improvements fit the team’s existing workflows and tools.')}</p></div>{button(t('Dónde encaja Orquivia','Where Orquivia fits'),url('applications'),'text-link')}</section>
+    {faqs()}<section class="section ideas"><div class="section-heading"><div>{eyebrow(t('Ideas para la gestión de proyectos','Project management insights'))}<h2 data-scroll-words>{t('Una mirada al proceso.','A closer look at the process.')}</h2></div>{button(t('Todas las ideas','All insights'),url('ideas'),'text-link')}</div><div class="article-grid">{ideas_cards(article_keys()[:2])}</div></section>{end_cta(on_home=True)}'''
+
+def consulting():
+    return intro(t('Consultoría de procesos','Process consulting'),t('Ordenar el trabajo.<br>Dar forma a la solución.','Organise the work.<br>Shape the solution.'),t('Analizamos cómo se gestiona el trabajo en tu despacho o equipo de arquitectura y actuamos donde hace falta: documentación, coordinación o una herramienta a medida.','We analyse how work is managed in your architecture practice or project team and work where it is needed: documentation, coordination or a tailored tool.'))+f'<section class="section editorial-intro"><p class="eyebrow">{t("De la necesidad al trabajo hecho","From a need to completed work")}</p><div><h2 class="reveal">{t("Una necesidad concreta.<br>Un alcance definido.","A specific need.<br>A defined scope.")}</h2><p>{t("Puede ser ordenar la documentación de varios proyectos, coordinar una actuación con un plazo ajustado o crear una aplicación para gestionar el trabajo. La solución se plantea a partir de la situación real y de lo que ya funciona.","It may involve organising documents across projects, coordinating a job within a tight window or building an application to manage work. The solution starts with the real situation and what already works.")}</p><p>{t("La propuesta concreta qué se hará, qué recibirás, en qué plazo y con qué presupuesto. El objetivo es resolver esa necesidad y dejar una forma de trabajar que puedas utilizar.","The proposal sets out the work, deliverables, schedule and fee. The aim is to address that need and leave you with a way of working you can use.")}</p></div></section>'+f'<figure class="consulting-photo">{photo("process",t("Análisis de procesos en un estudio de arquitectura","Workflow analysis in an architecture studio"))}<figcaption>{t("Escena ilustrativa","Illustrative scene")}</figcaption></figure>'+services()+method(True)+faqs()+end_cta()
+
+def applications():
+    scenarios=[
+      ('arquitectura','documents','documents',t('Despachos de arquitectura','Architecture practices'),t('Documentación en orden.<br>Gestión que acompaña al proyecto.','Organised documents.<br>Management that supports the project.'),t('Criterios comunes para preparar y compartir documentación. Procesos y herramientas para la gestión del despacho, desde los presupuestos hasta la siguiente entrega.','Shared standards for preparing and sharing documents. Processes and tools for practice management, from quotes through to the next delivery.')),
+      ('diseno','coordination','queries',t('Project managers','Project managers'),t('La consulta, situada.<br>El seguimiento, visible.','The query, in context.<br>Follow-up, made visible.'),t('Seguimiento de consultas, información y actuaciones dentro de proyectos de arquitectura. Hemos creado una app para que cada consulta se pueda crear y seguir visualmente desde un plano.','Tracking queries, information and specific assignments within architecture projects. We have built an app that lets queries be created and tracked visually from a drawing.'))]
+    chips=f'<button data-filter="all" aria-pressed="true">{t("Todos","All")}</button>'+''.join(f'<button data-filter="{x[0]}" aria-pressed="false">{x[3]}</button>' for x in scenarios)
+    cards=''.join(f'<article class="application-card" id="{x[0]}" data-category="{x[0]}"><a class="image-zoom" href="{url(x[1])}">{photo(x[2],x[3])}</a><div><p class="eyebrow">{x[3]}</p><h2>{x[4]}</h2><p>{x[5]}</p>{button(t("Ver el servicio","Explore the service"),url(x[1]),"text-link")}</div></article>' for x in scenarios)
+    return intro(t('Para quién','Who it’s for'),t('Arquitectura.<br>Project managers.<br>Un proceso más claro.','Architecture practices.<br>Project managers.<br>A clearer workflow.'),t('Consultoría para despachos y responsables de proyectos de arquitectura que necesitan organizar documentación, coordinar actuaciones y contar con herramientas ajustadas a su trabajo.','Consulting for architecture practices and project managers who need organised documents, coordinated assignments and tools designed around their work.'))+f'<section class="section"><div class="filter-list" role="group" aria-label="{t("Filtrar aplicaciones","Filter applications")}">{chips}</div><div class="application-list">{cards}</div></section>'+end_cta()
+
+def detail(key):
+    _,img,label,title,desc,tags=next(x for x in service_data() if x[0]==key)
+    content={
+      'documents':[
+        (t('La necesidad','The need'),t('Documentos que siguen criterios distintos, información que cuesta localizar o una preparación que vuelve a empezar en cada encargo.','Documents following different standards, information that is hard to find or preparation repeated for every commission.')),
+        (t('Qué hacemos','What we do'),t('Revisamos la documentación y el recorrido que sigue. Organizamos lo existente y definimos criterios comunes para su preparación, consulta y entrega. Cuando una tarea se repite, valoramos si conviene automatizarla.','We review the documents and their workflow. We organise what exists and define shared standards for preparation, reference and delivery. Where a task repeats, we assess whether automation makes sense.')),
+        (t('Qué debe quedar','What you should have afterwards'),t('Una base documental organizada y criterios que el equipo pueda aplicar. En Value Retail, este trabajo tomó forma en un estándar gráfico común para compartir planos de distintos proyectos.','An organised document base and standards the team can apply. At Value Retail, this work produced a shared graphic standard for drawings across projects.'))],
+      'operations':[
+        (t('La necesidad','The need'),t('Una actuación tiene una fecha de entrega y varias piezas que coordinar. Los materiales, las personas y el orden de trabajo tienen que encajar.','A project has a delivery date and several moving parts. Materials, people and the sequence of work need to fit together.')),
+        (t('Qué hacemos','What we do'),t('Preparamos la secuencia, coordinamos los recursos y hacemos seguimiento de la actuación acordada. El alcance y las responsabilidades se definen antes de empezar.','We prepare the sequence, coordinate resources and follow up on the agreed project. Scope and responsibilities are defined before work begins.')),
+        (t('Experiencia aplicada','Applied experience'),t('Hemos coordinado operaciones de colocación de materiales en plazos de ejecución muy cortos. La preparación, la secuencia de trabajo y el seguimiento se organizan alrededor de una entrega concreta.','We have coordinated material installation within very short delivery windows. Preparation, the sequence of work and follow-up are organised around a specific delivery.'))],
+      'coordination':[
+        (t('La necesidad','The need'),t('El trabajo tiene particularidades que una herramienta genérica no recoge bien. La información acaba repartida entre hojas, correos y conversaciones.','The work has specific needs that a generic tool does not fit well. Information ends up scattered across spreadsheets, emails and conversations.')),
+        (t('Qué construimos','What we build'),t('Aplicaciones de gestión adaptadas al proceso: presupuestos, facturas y gastos, o seguimiento de consultas de proyectos. Partimos del modo de trabajar actual y probamos el recorrido antes de extenderlo.','Management applications designed around the workflow: quotes, invoices and expenses, or project query tracking. We start with existing ways of working and test the workflow before extending it.')),
+        (t('Un ejemplo: las consultas sobre un plano','One example: queries on a drawing'),t('Hemos creado una aplicación para que project managers creen y sigan consultas directamente desde un plano. Una forma visual de relacionar cada consulta con el proyecto.','We have built an application that lets project managers create and track queries directly from a drawing. A visual way to relate each query to the project.')),
+        (t('Cuando las herramientas necesitan conectarse','When tools need to connect'),t('La solución también puede incluir automatizaciones o conexiones entre plataformas. Comprobamos sus capacidades y permisos para evitar volver a introducir información que ya existe.','The solution may also include automation or platform integrations. We check capabilities and permissions to avoid re-entering existing information.'))],
+      'integrations':[
+        (t('La necesidad','The need'),t('El mismo dato se introduce en más de una herramienta y los cambios no siempre llegan a todos los sitios donde se necesitan.','The same data is entered into more than one tool and changes do not always reach every place they are needed.')),
+        (t('Qué hacemos','What we do'),t('Identificamos el origen de la información y comprobamos qué permiten las plataformas actuales. Diseñamos una conexión o automatización con las validaciones necesarias y la probamos sobre un recorrido definido.','We identify the source of information and check what existing platforms support. We design an integration or automation with the necessary validation, then test a defined workflow.')),
+        (t('Qué debe resolver','What it should address'),t('Que el dato se pueda utilizar donde hace falta sin copiarlo en cada paso. La integración concreta depende de las posibilidades técnicas y los permisos de cada herramienta.','Making data available where it is needed without copying it at each step. The integration depends on the technical capabilities and permissions of each tool.'))]
+    }
+    concise={
+      'documents': [
+        t('Versiones dispersas, criterios distintos y una preparación que vuelve a empezar en cada encargo.','Scattered versions, inconsistent standards and setup repeated for every commission.'),
+        t('Organizamos lo existente y definimos cómo preparar, revisar y compartir la documentación.','We organise existing documents and define how to prepare, review and share them.'),
+        t('Una base organizada y criterios que el equipo puede aplicar en la siguiente entrega.','An organised foundation and standards the team can apply to the next delivery.')],
+      'operations': [
+        t('Una entrega concreta exige que materiales, personas y tiempos encajen.','A specific delivery needs materials, people and timing to fit together.'),
+        t('Preparamos la secuencia, coordinamos los recursos y seguimos el avance de la actuación acordada.','We prepare the sequence, coordinate resources and track the agreed assignment.'),
+        t('Experiencia en colocación de materiales con plazos de ejecución muy ajustados.','Experience coordinating material installation within tight delivery windows.')],
+      'coordination': [
+        t('Hojas, correos y conversaciones que no recogen bien las particularidades del trabajo.','Spreadsheets, emails and conversations that do not fit the work’s specific needs.'),
+        t('Apps de presupuestos, facturas y gastos, o consultas visuales de proyectos, adaptadas al proceso actual.','Apps for quotes, invoices and expenses, or visual project queries, designed around the current process.'),
+        t('Una aplicación desarrollada para crear y seguir consultas directamente desde un plano.','An application developed to create and track queries directly from a drawing.'),
+        t('Automatizaciones y conexiones entre plataformas, según sus capacidades y permisos.','Automation and platform connections, according to their capabilities and permissions.')],
+      'integrations': [
+        t('El mismo dato se copia en varias herramientas y los cambios no llegan a todos los destinos.','The same information is copied into several tools and changes do not reach every destination.'),
+        t('Identificamos el origen, comprobamos las plataformas y probamos una conexión con validaciones claras.','We identify the source, check the platforms and test a connection with clear validation.'),
+        t('Información disponible donde hace falta, con menos pasos de introducción manual.','Information available where needed, with fewer manual entry steps.')]
+    }
+    rows=''.join(f'<article class="service-point"><span class="step-number">0{i+1}</span><h2>{a}</h2><p>{concise[key][i]}</p></article>' for i,(a,_) in enumerate(content[key]))
+    overview=f'<section class="section detail-layout"><aside>{photo(img,label)}<p class="eyebrow">{t("El trabajo y su recorrido","The work and its workflow")}</p><p>{t("Alcance, entregables y plazos definidos.","Defined scope, deliverables and timing.")}</p></aside><div class="service-points">{rows}</div></section>'
+    visual=f'<section class="section service-workflow">{workflow_figure(VISUAL_STORIES[key],LANG)}</section>'
+    connections=f'<section class="section connection-note">{button(t("Ver automatizaciones y conexiones","Explore automation & integrations"),url("integrations"),"text-link")}</section>' if key=='coordination' else ''
+    showcase=app_showcase(['queries','quotes']) if key=='coordination' else app_showcase(['operations']) if key=='operations' else ''
+    return intro(label,title,desc,img)+overview+visual+showcase+connections+(case_teaser() if key=='documents' else '')+end_cta()
+
+
+def about():
+    values=[(t('Escuchar antes de proponer','Listen before proposing'),t('Empiezo por una tarea real, los datos que utiliza y las decisiones que condiciona. El contexto importa tanto como la herramienta.','I start with a real task, the data it uses and the decisions it affects. Context matters as much as the tool.')),(t('Entender qué hay detrás','Understand what lies behind it'),t('Una revisión repetida puede ser un síntoma. Analizamos qué criterio falta y qué supone para quien prepara, valida o recibe la documentación.','A repeated review may be a symptom. We examine which standard is missing and what that means for those preparing, approving or receiving documents.')),(t('Conservar lo que funciona','Keep what works'),t('Diseño mejoras que aprovechan las herramientas y los procesos útiles de cada empresa. El cambio se comprueba antes de ampliarlo.','I design improvements around each business’s useful tools and processes. Changes are checked before they are extended.')),(t('Dejar una base utilizable','Leave a usable foundation'),t('Criterios y procesos que tu equipo pueda consultar, aplicar y mantener después de la consultoría.','Standards and processes your team can consult, apply and maintain after the engagement.'))]
+    return f'''<section class="plain-hero section"><p class="eyebrow">ORQUIVIA · NICOLE PEREYRA</p><h1 data-enter>{t('Del trabajo real<br>a una solución<br>que encaja.','From real work<br>to a solution<br>that fits.')}</h1><p>{t('Procesos, coordinación y herramientas de gestión a medida para despachos de arquitectura y project managers.','Tailored processes, coordination and management tools for architecture practices and project managers.')}</p></section>'''+founder()+f'''<section class="section other-experience">{eyebrow(t('Experiencia en otros contextos','Experience in other settings'))}<p>{t('También he creado aplicaciones para pequeños negocios y equipos de postventa. Experiencias que afianzan una misma forma de trabajar: adaptar la herramienta al ritmo del negocio.','I have also built applications for small businesses and after-sales teams. Those experiences reinforce one approach: adapting the tool to the business’s working rhythm.')}</p><ul class="experience-tags"><li>{t("Floristería","Florist")}</li><li>{t("Carpintería","Carpentry")}</li><li>{t("Postventa","After-sales")}</li></ul></section><section class="section values"><div>{eyebrow(t('Mi forma de trabajar','How I work'))}<h2 data-scroll-words>{t('Una mirada externa.<br>Soluciones concretas.','An outside perspective.<br>Practical solutions.')}</h2><p class="values-note">{t('Lidero el análisis y la puesta en práctica de cada intervención. La propuesta define qué se va a resolver, qué recibirás y cómo se comprobará el resultado.','I lead the analysis and implementation of each engagement. The proposal defines what will be addressed, what you will receive and how the result will be checked.')}</p></div><div class="numbered-list principles-grid">{''.join(f'<article class="reveal"><span>0{i+1}</span><div><h3>{a}</h3><p>{b}</p></div></article>' for i,(a,b) in enumerate(values))}</div></section>'''+case_teaser()+end_cta()
+
+
+def ideas():
+    return f'<section class="plain-hero section">{eyebrow(t("Ideas · Orquivia","Insights · Orquivia"))}<h1 data-enter>{t("Otra forma de<br>mirar el proceso.","A fresh perspective<br>on the process.")}</h1><p>{t("Lecturas para despachos y gestores de proyectos de arquitectura. De una tarea que se repite a una mejora concreta en capacidad, entregas o respuesta al cliente.","Reading for architecture practices and project managers. From a recurring task to a specific improvement in capacity, delivery or client response.")}</p></section><section class="section ideas-index" id="lecturas"><div class="ideas-index-heading">{eyebrow(t("Procesos · Automatizaciones · Apps · Conexiones","Processes · Automation · Apps · Integrations"))}<span class="small-note">{len(ARTICLES)} {t("ideas para tu despacho","ideas for your practice")}</span></div><div class="article-grid">{ideas_cards()}</div></section>'+end_cta()
+
+def article(key):
+    item=ARTICLES[key]
+    title=escape(item['title'][LANG])
+    anchors=[f'lectura-{i+1}' for i in range(len(item['sections']))]
+    toc=''.join(f'<a href="#{anchor}"><span>0{i+1}</span>{escape(section["heading"][LANG])}</a>' for i,(anchor,section) in enumerate(zip(anchors,item['sections'])))
+    chapters=[]
+    for i,section in enumerate(item['sections']):
+        paragraphs=''.join('<p>'+escape(paragraph[LANG])+'</p>' for paragraph in section['paragraphs'])
+        chapters.append(f'<section class="reading-chapter" id="{anchors[i]}"><span class="reading-number">0{i+1}</span><h2>{escape(section["heading"][LANG])}</h2>{paragraphs}</section>')
+        if i==0:
+            chapters.append(workflow_figure(VISUAL_STORIES[key],LANG,compact=True))
+        if i==2 and key in ('article-app','article-status','article-changes'):
+            chapters.append(app_mockup(next(x for x in MOCKUPS if x['key']=='queries')))
+    similar=[other for other in article_keys() if other!=key and ARTICLES[other]['solution']==item['solution']]
+    related=(similar+[other for other in article_keys() if other!=key and other not in similar])[:2]
+    minutes=reading_minutes(item)
+    return f'<article><header class="article-hero section"><a class="underlined" href="{url("ideas")}#lecturas">{t("Todas las ideas","All insights")}</a>{eyebrow(escape(item["category"][LANG])+f" · {minutes} MIN")}<h1 data-enter>{title}</h1><p class="article-lead">{escape(item["summary"][LANG])}</p></header><div class="article-cover">{photo(item["image"],"","",True)}</div><div class="section reading-layout"><aside class="reading-index">{eyebrow(t("En esta idea","In this article"))}<nav aria-label="{t("Contenido del artículo","Article contents")}">{toc}</nav></aside><div class="article-body">{"".join(chapters)}<aside class="article-callout"><p>{t("Una pregunta para tu próximo proyecto","A question for your next project")}</p><h3>{escape(item["question"][LANG])}</h3>{button(t("Ver este servicio","Explore this service"),url(item["solution"]),"text-link")}</aside></div></div></article><section class="section related-ideas"><div class="section-heading"><div>{eyebrow(t("Sigue explorando","Keep exploring"))}<h2>{t("Otra pieza<br>del proceso.","Another part<br>of the process.")}</h2></div>{button(t("Todas las ideas","All insights"),url("ideas"),"text-link")}</div><div class="article-grid">{ideas_cards(related)}</div></section>'+end_cta()
+
+def site_directory():
+    return intro(t('Mapa web','Site map'),t('Todas las páginas.<br>Un lugar para encontrarlas.','Every page.<br>One place to find it.'),t('Explora los servicios, el caso real y las ideas de Orquivia. Cada página está disponible en español e inglés.','Explore Orquivia’s services, case study and insights. Every page is available in Spanish and English.'),compact=True)+render_directory(LANG,ROUTES,TITLES)
+
+
+def booking_panel():
+    booking_url = SETTINGS.get('booking_url', '')
+    if booking_url:
+        return f'''<section class="booking-panel" id="agenda">{eyebrow(t('Primera conversación','First conversation'))}<h2>{t('Elige un momento.','Choose a time.')}</h2><p>{t('Consulta los horarios disponibles y reserva una llamada de 15 minutos. La reserva se gestiona en la agenda externa.','Check available times and book a 15-minute call. Booking is handled on the external calendar.')}</p>{button(t('Ver horarios disponibles','See available times'),escape(booking_url,quote=True),'ink')}<p class="small-note">{t('Antes de confirmar, revisa la información de privacidad del servicio de reservas.','Before confirming, review the booking service’s privacy information.')}</p></section>'''
+    return f'''<section class="booking-panel" id="agenda">{eyebrow(t('Una primera llamada de 15 minutos','An initial 15-minute call'))}<h2>{t('Propón un momento.','Suggest a time.')}</h2><p>{t('Indica una fecha y una hora en el formulario. Te responderé por correo para confirmar la cita o proponerte otra opción.','Suggest a date and time in the form. I’ll reply by email to confirm the call or offer another time.')}</p><p class="small-note">{t('Hora de Barcelona · La fecha propuesta queda pendiente de confirmación.','Barcelona time · Your proposed time is subject to confirmation.')}</p></section>'''
+
+def contact():
+    schedule = '' if SETTINGS.get('booking_url') else f'''<fieldset class="schedule-fields"><legend>{t('¿Cuándo te vendría bien conversar? (opcional)','When would you like to talk? (optional)')}</legend><div class="form-row"><label>{t('Fecha propuesta','Suggested date')}<input name="preferred_date" type="date" aria-describedby="schedule-note"></label><label>{t('Hora propuesta','Suggested time')}<input name="preferred_time" type="time" step="900" aria-describedby="schedule-note"></label></div><p id="schedule-note" class="small-note">{t('Hora de Barcelona. Confirmaremos la disponibilidad por correo.','Barcelona time. Availability will be confirmed by email.')}</p></fieldset>'''
+    fields=f'''<div class="form-row"><label>{t('Tu nombre','Your name')}<input name="name" autocomplete="name" required maxlength="100" placeholder="{t('Cómo te llamas','Your name')}"></label><label>{t('Email profesional','Work email')}<input name="email" type="email" autocomplete="email" required maxlength="160" placeholder="nombre@empresa.com"></label></div><label>{t('Empresa o proyecto','Business or project')}<input name="company" autocomplete="organization" required maxlength="160" placeholder="{t('El nombre de tu empresa o proyecto','Your business or project name')}"></label><fieldset><legend>{t('¿Dónde quieres poner el foco?','Where would you like to focus?')}</legend><div class="choice-grid">{''.join(f'<label class="choice"><input type="checkbox" name="focus" value="{label}"><span>{label}</span></label>' for label in [t('Procesos y documentación','Processes & documents'),t('Coordinación de una actuación','Project coordination'),t('Apps y automatizaciones','Apps & automation'),t('Quiero explorar mi caso','I’d like to explore my situation')])}</div></fieldset><label>{t('¿Cómo lo gestionáis hoy y qué os gustaría conseguir?','How do you manage it today, and what would you like to achieve?')}<textarea name="message" rows="4" required minlength="10" maxlength="3000" placeholder="{t('Por ejemplo: queremos seguir las consultas de cada proyecto o gestionar presupuestos y gastos desde una herramienta adaptada a nuestro trabajo.','For example: we want to track project queries or manage quotes and expenses in a tool adapted to our work.')}"></textarea></label>{schedule}<p class="privacy-summary">{t("Responsable: Orquivia Global SL. Usamos el correo recibido para atender tu consulta y preparar una propuesta si la solicitas. Puedes ejercer tus derechos en info@orquivia.com. Información completa en la política de privacidad.","Controller: Orquivia Global SL. Received email is used to handle your enquiry and prepare a proposal if requested. Exercise your rights at info@orquivia.com. Full information is available in the privacy policy.")}</p><label class="privacy-check"><input type="checkbox" name="privacy" required><span>{t('He leído la información de','I have read the')} <a href="{url('cookies')}#privacidad">{t('protección de datos','data protection information')}</a>.</span></label><button type="submit" class="button ink"><span>{t('Preparar conversación','Prepare our conversation')}</span>{icon('arrow-right')}</button><p class="form-note">{t('Primero revisarás tu mensaje. Después podrás abrirlo en tu correo para enviarlo.','First, review your message. Then open it in your email app to send it.')}</p>'''
+    return f'''<section class="contact-page section"><div class="contact-heading">{eyebrow(t('Hablemos de tu próximo paso','Let’s talk about your next step'))}<h1 data-enter>{t('Todo empieza<br>con tu proyecto.','It all starts<br>with your project.')}</h1><p>{t('Basta con una tarea del despacho que se repita o una consulta de proyecto que cueste seguir. No necesitas preparar un informe: cuéntame qué ocurre y qué te gustaría gestionar mejor.','One recurring practice task or a project query that is hard to track is enough. No report needed: tell me what happens and what you would like to manage better.')}</p><div class="contact-expectations"><span>15 {t('minutos para situarnos','minutes to get oriented')}</span><span>{t('Un proceso concreto como punto de partida','One specific process to start with')}</span><span>{t('Una recomendación concreta de próximos pasos','A clear recommendation for next steps')}</span></div>{booking_panel()}{photo('studio',t('Un espacio tranquilo para conversar','A quiet space for a conversation'),'contact-photo')}<a class="underlined" href="mailto:info@orquivia.com">info@orquivia.com</a></div><div class="contact-form-wrap"><form data-contact-form>{fields}</form><section class="form-review" hidden aria-labelledby="review-title"><p class="eyebrow">{t('Tu mensaje está preparado','Your message is ready')}</p><h2 id="review-title" tabindex="-1">{t('Un buen punto<br>de partida.','A good<br>starting point.')}</h2><p>{t('Revísalo antes de enviarlo. Todavía no se ha enviado ningún mensaje.','Review it before sending. No message has been sent yet.')}</p><pre class="message-preview"></pre><div class="review-actions"><a class="button gold" data-mail-link href="mailto:info@orquivia.com">{t('Abrir mi correo','Open my email')}{icon('paper-plane-tilt')}</a><button type="button" class="button outline" data-copy-message>{t('Copiar mensaje','Copy message')}{icon('copy')}</button><button type="button" class="text-button" data-edit-message>{t('Editar mis respuestas','Edit my answers')}</button></div><p role="status" data-form-status></p><p class="small-note">{t('Si no tienes una aplicación de correo configurada, copia el mensaje y envíalo a info@orquivia.com.','If you do not have an email app configured, copy the message and send it to info@orquivia.com.')}</p></section></div></section>'''
+def legal(key):
+    data=json.loads((ROOT/'content/legal-revised.json').read_text(encoding='utf-8'))[key]
+    def paragraph(text):
+        for name, value in SETTINGS.items():
+            if isinstance(value, str): text=text.replace('{'+name+'}', value)
+        return '<p>'+escape(text)+'</p>'
+    sections=[]
+    for i, section in enumerate(data['sections']):
+        links=''.join(f'<li><a href="{url(link[2]) if link[2] in ROUTES else escape(link[2],quote=True)}">{escape(link[LANG])}</a></li>' for link in section.get('links', []))
+        if key=='legal' and section['id']=='titular' and SETTINGS.get('registry'):
+            section['paragraphs'].append([SETTINGS['registry'], SETTINGS.get('registry_en',SETTINGS['registry'])])
+            links+=f'<li><a href="{escape(SETTINGS["registry_source"],quote=True)}">{t("Publicación registral en el BORME","Registry publication in the BORME")}</a></li>'
+        sections.append(f'<article id="{section["id"]}"><h2>{i+1}. {escape(section["heading"][LANG])}</h2>'+''.join(paragraph(p[LANG]) for p in section['paragraphs'])+(f'<ul>{links}</ul>' if links else '')+'</article>')
+    registry_note=''
+    if key=='legal' and not SETTINGS.get('registry'):
+        registry_note=f'<p class="legal-pending">{t("Datos de inscripción en el Registro Mercantil: pendientes de incorporar.","Mercantile Registry details: pending completion.")}</p>'
+    toc=''.join(f'<a href="#{section["id"]}">{escape(section["heading"][LANG])}</a>' for section in data['sections'])
+    overview=f'<section class="section legal-overview"><div>{icon("list")}<span>{t("Consulta por temas","Browse by topic")}</span></div><div>{icon("check")}<span>{t("Información completa a continuación","Full information below")}</span></div><a href="mailto:info@orquivia.com">{icon("paper-plane-tilt")}<span>info@orquivia.com</span></a></section>'
+    return f'<section class="plain-hero section">{eyebrow(t("Información legal","Legal information"))}<h1>{escape(data["title"][LANG])}</h1><p>{escape(data["intro"][LANG])}</p><p class="legal-date">{t("Última actualización: 5 de octubre de 2026.","Last updated: 5 October 2026.")}</p></section>{overview}<section class="legal-layout section"><aside class="legal-summary"><strong>{escape(data["summary"][LANG])}</strong><nav aria-label="{t("Contenido de esta página","On this page")}">{toc}</nav></aside><div class="legal-content">{registry_note}{"".join(sections)}</div></section>'
+
+def founder(compact=False):
+    return f'''<section class="section founder-section {'founder-compact' if compact else ''}" id="nicole"><div class="founder-intro">{eyebrow(t('La persona detrás de Orquivia','The person behind Orquivia'))}<h2 data-scroll-words>{t('Del proceso repetido<br>a la solución.','From repetitive work<br>to a practical solution.')}</h2><p>{t('Soy Nicole Pereyra, fundadora de Orquivia. Trabajo con despachos de arquitectura y project managers para organizar la documentación, coordinar actuaciones y desarrollar herramientas de gestión adaptadas a su equipo.','I’m Nicole Pereyra, founder of Orquivia. I work with architecture practices and project managers to organise documents, coordinate specific assignments and develop management tools designed around their team.')}</p><p>{t('Mi experiencia combina documentación de arquitectura y retail, coordinación de actuaciones y aplicaciones para la gestión de proyectos. Cada intervención empieza por entender cómo trabaja el equipo.','My experience combines architecture and retail documentation, project coordination and project management applications. Each engagement starts by understanding how the team works.')}</p>{button(t('Hablemos de tu proyecto','Let’s discuss your project'),url('contact'),'text-link')}</div><figure class="founder-card"><img src="assets/editorial/nicole-pereyra-seleccionada.png" alt="Nicole Pereyra, Founder de Orquivia" width="1122" height="1402" loading="lazy"><figcaption><div><h3>Nicole Pereyra</h3><p>Founder</p></div><span>01</span></figcaption></figure></section>'''
+
+
+def case_teaser():
+    return f'''<section class="section case-feature" id="caso-value-retail"><a href="{url('value-retail')}" class="case-visual"><div class="case-logo-panel"><img src="assets/value-retail-official.svg" alt="Value Retail" width="180" height="42"><span>{t('CASO DE ESTUDIO','CASE STUDY')}</span></div>{photo('documents',t('Esquema de documentación; no representa planos del cliente','Document diagram; not client drawings'),diagram=True)}</a><div class="case-feature-copy">{eyebrow(t('Value Retail · Documentación técnica','Value Retail · Technical documentation'))}<h2 data-scroll-words>{t('Muchos planos.<br>Un mismo lenguaje.','Many drawings.<br>One shared language.')}</h2><p>{t('Proyectos existentes, dibujados con criterios distintos. Una necesidad concreta: que todos sus planos se pudieran leer y compartir con los clientes bajo un mismo estándar.','Existing projects, drawn to different conventions. One clear need: drawings that could be read and shared with clients using a single standard.')}</p><p>{t('Analizamos la documentación, identificamos sus elementos comunes y los convertimos en una base gráfica compartida.','We analysed the documentation, identified common elements and turned them into a shared graphic foundation.')}</p>{button(t('Ver el caso de Value Retail','Explore the Value Retail case'),url('value-retail'),'ink')}</div></section>'''
+
+
+def value_retail():
+    sections=[(t('El punto de partida','The starting point'),t('Los proyectos ya existían. El criterio común, todavía no.','The projects already existed. The shared standard did not.'),t('Value Retail contaba con planos de proyectos existentes dibujados de distintas formas. La documentación respondía a criterios gráficos diferentes y necesitaba una línea de dibujo estándar para el conjunto de sus proyectos.','Value Retail had drawings of existing projects produced in different ways. The documentation followed different graphic conventions and needed a standard drawing approach across projects.')),
+    (t('Lo que estaba en juego','Why it mattered'),t('Compartir un plano es compartir una forma de entenderlo.','Sharing a drawing means sharing a way to understand it.'),t('El objetivo era disponer de una única forma de ver y compartir los planos con sus clientes. Cuando el criterio cambia de un documento a otro, la lectura deja de ser consistente: antes de hablar del proyecto, hay que entender cómo se ha representado.','The goal was a single way to view and share drawings with clients. When conventions change from one document to another, reading becomes inconsistent: before discussing the project, people need to understand how it has been represented.')),
+    (t('El trabajo de consultoría','The consulting work'),t('Analizar lo existente. Encontrar lo común. Definir un estándar.','Analyse what exists. Find the common elements. Define a standard.'),t('Partimos del análisis de los planos disponibles. Identificamos las partes y los criterios que se repetían entre proyectos y los transformamos en una base de representación común. La estandarización se construyó a partir de su propia documentación.','We started by analysing the available drawings. We identified recurring elements and conventions across projects and translated them into a shared representation framework. Standardisation was built from their own documentation.')),
+    (t('El cambio conseguido','The resulting change'),t('Distintos proyectos, una misma lectura.','Different projects, one consistent reading.'),t('La documentación pasó a seguir un estándar común para visualizar y compartir los planos con los clientes. El resultado es una línea gráfica compartida entre proyectos, en lugar de resolver el criterio de representación en cada entrega.','The documentation was brought under a common standard for viewing and sharing drawings with clients. The result is a shared graphic approach across projects, rather than deciding representation conventions for each delivery.'))]
+    return f'''<article class="case-study"><header class="case-hero section"><a href="{url('applications')}" class="underlined">{t('Arquitectura y gestión de proyectos','Architecture & project management')}</a><div class="case-heading"><div>{eyebrow(t('Caso de estudio · Value Retail','Case study · Value Retail'))}<h1 data-enter>{t('Muchos planos.<br>Un mismo lenguaje.','Many drawings.<br>One shared language.')}</h1><p>{t('De distintos criterios de dibujo a un estándar común para leer y compartir proyectos.','From different drawing conventions to one shared standard for reading and sharing projects.')}</p></div><img src="assets/value-retail-official.svg" alt="Value Retail" width="180" height="42"></div><dl class="case-facts"><div><dt>{t('Cliente','Client')}</dt><dd>Value Retail</dd></div><div><dt>{t('Ámbito','Focus')}</dt><dd>{t('Documentación de proyectos de retail','Retail project documentation')}</dd></div><div><dt>{t('Intervención','Engagement')}</dt><dd>{t('Consultoría y estandarización gráfica','Consulting & graphic standardisation')}</dd></div></dl></header><div class="case-cover">{photo('documents',t('Esquema de documentación, no corresponde a planos de Value Retail','Document diagram, not Value Retail drawings'),diagram=True)}<p>{t('Esquema del enfoque · Los planos del cliente no se muestran.','Workflow diagram · Client drawings are not shown.')}</p></div><div class="section case-body"><aside>{eyebrow(t('La distancia que había que cerrar','The gap to close'))}<p>{t('De interpretar cada plano de forma distinta a compartir una lectura común.','From interpreting each drawing differently to sharing a consistent reading.')}</p></aside><div>{''.join(f'<section class="case-chapter"><p class="eyebrow">0{i+1} / {a}</p><h2 data-scroll-words>{b}</h2><p>{c}</p></section>' for i,(a,b,c) in enumerate(sections))}</div></div><section class="section case-takeaway">{eyebrow(t('¿Reconoces esta situación?','Does this sound familiar?'))}<h2 data-scroll-words>{t('Si cada plano necesita<br>una explicación distinta,<br>hablemos del criterio.','If every drawing needs<br>a different explanation,<br>let’s discuss the standard.')}</h2><p>{t('El primer paso es revisar cómo documentáis hoy, qué dudas se repiten y qué tendría que cambiar para vuestro equipo y vuestros clientes.','The first step is to review how you document today, which questions keep returning and what would need to change for your team and clients.')}</p>{button(t('Conversemos sobre tu documentación','Let’s discuss your documentation'),url('contact'),'ink')}</section></article>'''
+
+TITLES={
+ 'value-retail':('Value Retail: estandarización de planos','Value Retail: drawing standardisation'),
+ 'site-map':('Mapa web','Site map'),
+ 'home':('Procesos y herramientas para arquitectura y project managers','Processes and tools for architecture practices and project managers'),
+ 'consulting':('Consultoría que parte de tu realidad','Consulting that starts from your reality'),
+ 'applications':('Consultoría para arquitectura y project managers','Consulting for architecture practices and project managers'),
+ 'about':('Nicole Pereyra, Founder de Orquivia','Nicole Pereyra, Founder of Orquivia'),
+ 'ideas':('Ideas para avanzar','Ideas to move forward'), 'contact':('Exploremos tu proyecto','Let’s explore your project'),
+ 'documents':('Procesos y documentación','Processes and documents'), 'operations':('Coordinación de actuaciones','Project coordination'), 'coordination':('Aplicaciones a medida','Custom applications'),
+ 'integrations':('Conexión de plataformas','Connected platforms'), 'article-process':('Antes de elegir otra herramienta','Before choosing another tool'),
+ 'article-step':('Un cambio que encaja','A change that fits'), 'legal':('Aviso legal','Legal notice'), 'terms':('Términos y condiciones','Terms and conditions'), 'cookies':('Privacidad y cookies','Privacy & cookies')}
+TITLES.update({key: tuple(item['title']) for key, item in ARTICLES.items()})
+
+def build(key):
+    body={'value-retail':value_retail,'home':home,'consulting':consulting,'applications':applications,'about':about,'ideas':ideas,'contact':contact,'site-map':site_directory}.get(key)
+    body=body() if body else detail(key) if key in ('documents','operations','coordination','integrations') else article(key) if key.startswith('article-') else legal(key)
+    head=metadata(key,LANG,ROUTES,TITLES,ARTICLES,SETTINGS['site_url'],INDEXABLE)
+    schema=structured_data(key,LANG,ROUTES,TITLES,ARTICLES,SETTINGS)
+    style_version=hashlib.sha256((ROOT/'styles.css').read_bytes()).hexdigest()[:10]
+    script_version=hashlib.sha256((ROOT/'script.js').read_bytes()).hexdigest()[:10]
+    if key!='home':
+        crumbs=f'<a href="{url("home")}">{t("Inicio","Home")}</a>'
+        if key in ARTICLES: crumbs+=f'<span aria-hidden="true">/</span><a href="{url("ideas")}">{t("Ideas","Insights")}</a>'
+        crumbs+=f'<span aria-hidden="true">/</span><span aria-current="page">{escape(TITLES[key][LANG])}</span>'
+        body+=f'<nav class="page-breadcrumb" aria-label="{t("Ruta de navegación","Breadcrumb")}">{crumbs}</nav>'
+    return f'''<!doctype html>
+<html lang="{t('es','en')}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{head}<meta name="theme-color" content="#faf8f2">{schema}<link rel="icon" href="assets/logo-sencillo.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/fonts/manrope.css"><link rel="stylesheet" href="styles.css?v={style_version}"><script src="script.js?v={script_version}" defer></script></head><body class="page-{key}" id="top">{header(key)}<main id="main">{body}</main>{footer()}</body></html>'''
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--production',action='store_true',help='Create indexable output for the verified production domain.')
+    parser.add_argument('--output',type=Path,help='Export public files to a separate directory.')
+    args=parser.parse_args()
+    if args.production and not args.output:
+        parser.error('--production requires --output so the local review stays noindex.')
+    INDEXABLE=args.production
+    destination=args.output.resolve() if args.output else ROOT
+    destination.mkdir(parents=True,exist_ok=True)
+    for LANG in (0,1):
+        for key in ROUTES:
+            (destination/url(key)).write_text(build(key),encoding='utf-8')
+    (destination/'sitemap.xml').write_text(sitemap(ROUTES,SETTINGS['site_url']),encoding='utf-8')
+    (destination/'robots.txt').write_text('User-agent: *\nAllow: /\n'+('\nSitemap: '+SETTINGS['site_url']+'sitemap.xml\n' if INDEXABLE else ''),encoding='utf-8')
+    if destination!=ROOT:
+        from export_assets import copy_assets
+        copy_assets(ROOT,destination)
+        (destination/'.nojekyll').write_text('',encoding='utf-8')
+        if INDEXABLE: (destination/'CNAME').write_text('orquivia.com\n',encoding='utf-8')
+    print(f'Built {len(ROUTES)*2} pages ({"production" if INDEXABLE else "review"}) in {destination}.')

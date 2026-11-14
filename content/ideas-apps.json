@@ -1,0 +1,287 @@
+[
+  {
+    "key": "article-app",
+    "routes": [
+      "app-seguimiento.html",
+      "tracking-app.html"
+    ],
+    "image": "process",
+    "title": [
+      "¿Hace falta una app o basta con ordenar el seguimiento?",
+      "Do you need an app, or a clearer tracking process?"
+    ],
+    "category": [
+      "Aplicaciones a medida",
+      "Custom applications"
+    ],
+    "summary": [
+      "Una hoja puede seguir siendo útil. La señal para construir una app aparece cuando reconstruir estados limita las respuestas, la coordinación o la capacidad del despacho.",
+      "A spreadsheet can remain useful. A custom app becomes relevant when reconstructing project status starts to limit responses, coordination or the practice’s capacity."
+    ],
+    "lead": [
+      "Imagina un despacho que mantiene una hoja de seguimiento por proyecto. Funciona hasta que, para preparar una reunión, alguien cruza varias versiones, consulta mensajes y confirma qué información sigue vigente. La primera pregunta no es qué app comprar: es qué decisión cuesta tomar con el sistema actual.",
+      "Imagine a practice with a tracking spreadsheet for each project. It works until preparing a meeting requires comparing versions, searching messages and checking which information is current. The first question is not which app to buy. It is which decision the current system makes difficult."
+    ],
+    "sections": [
+      {
+        "heading": [
+          "La hoja no siempre es el problema",
+          "The spreadsheet is not always the problem"
+        ],
+        "paragraphs": [
+          [
+            "Si nadie sabe cuándo actualizar un estado o qué significa «pendiente», una app reproducirá esa ambigüedad. Antes de desarrollar, conviene definir qué se registra, quién mantiene cada dato y qué condición permite pasar al siguiente estado. Una vista compartida y menos campos pueden resolver buena parte del recorrido.",
+            "If nobody knows when to update a status or what ‘pending’ means, an app will reproduce that ambiguity. Before development, define what gets recorded, who maintains each piece of information and what allows an item to move to the next status. A shared view with fewer fields may resolve much of the process."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Cuándo cambia la necesidad",
+          "When the need changes"
+        ],
+        "paragraphs": [
+          [
+            "La necesidad es distinta si una misma información alimenta varios proyectos, existen permisos diferentes o el siguiente paso depende de una fecha, un documento y una validación. Cuando mantener esas relaciones obliga a copiar datos o revisar continuamente la hoja, una aplicación puede aportar algo que la simplificación por sí sola no resuelve.",
+            "The need changes when the same information feeds several projects, access differs by role, or the next step depends on a date, a document and an approval. If maintaining those relationships requires copying data or repeatedly inspecting a spreadsheet, an application may provide something that simplifying the process alone cannot."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Una app con una tarea clara",
+          "An app with a clear job"
+        ],
+        "paragraphs": [
+          [
+            "Una primera versión podría reunir hitos, responsables y documentos pendientes de un conjunto de encargos. Cada dato tendría una fuente identificada; las alertas señalarían qué impide avanzar y la vista de proyecto mostraría la información necesaria para responder al cliente. El objetivo es resolver ese recorrido, antes de incorporar funciones que nadie necesita todavía.",
+            "A first version could bring together milestones, owners and outstanding documents across a group of commissions. Each field would have an identified source. Alerts would show what prevents progress, while the project view would provide the information needed to respond to a client. Resolve that workflow before adding features nobody needs yet."
+          ],
+          [
+            "También debe quedar claro qué sucede si una conexión falla o un dato todavía no está disponible. Mostrar la última actualización y los pendientes permite distinguir información confirmada de información incompleta. El acceso por función y la posibilidad de recuperar los datos forman parte del diseño, para que la aplicación encaje en la operativa del despacho.",
+            "The design must also make clear what happens if a connection fails or information is not yet available. Showing the last update and outstanding items distinguishes confirmed information from an incomplete picture. Role-based access and the ability to retrieve the data are part of the design, so the application fits the practice’s operations."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Medir el mantenimiento del seguimiento",
+          "Measure the work needed to keep tracking current"
+        ],
+        "paragraphs": [
+          [
+            "Durante una prueba, observa cuánto cuesta mantener el seguimiento actualizado: dónde se vuelve a introducir un dato, cuántas copias hay que corregir y qué registros quedan desactualizados. Comprueba también que cada función accede a la información que necesita. Compara ese mantenimiento con el recorrido anterior. La app tiene sentido si resuelve las relaciones entre proyectos y permite ampliar la cartera sin multiplicar su administración.",
+            "During a pilot, observe the work needed to keep tracking current: where data is entered again, how many copies need correcting and which records become outdated. Also check that each role can access the information it needs. Compare this upkeep with the previous workflow. The app makes sense if it manages relationships between projects and supports a larger portfolio without multiplying its administration."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Empieza por la última reunión",
+          "Start with the last meeting"
+        ],
+        "paragraphs": [
+          [
+            "Reúne la hoja utilizada, las preguntas que quedaron sin respuesta y las fuentes que hubo que consultar. Ese ejemplo permite analizar la causa y proponer una solución acotada: ajustar el proceso, conectar información o construir una app. Orquivia define esa recomendación y puede desarrollar el recorrido elegido, con una prueba que permita comprobar su utilidad antes de ampliarlo.",
+            "Gather the spreadsheet used in the last meeting, the questions left unanswered and the sources that had to be consulted. That example makes it possible to analyse the cause and propose a focused solution: refine the process, connect information or build an app. Orquivia defines the recommendation and can develop the selected workflow, with a trial that establishes its usefulness before expansion."
+          ]
+        ]
+      }
+    ],
+    "question": [
+      "¿Qué pregunta sobre tus proyectos exige hoy consultar más de una fuente?",
+      "Which question about your projects currently requires checking more than one source?"
+    ],
+    "solution": "coordination"
+  },
+  {
+    "key": "article-changes",
+    "routes": [
+      "solicitudes-cambio.html",
+      "change-requests.html"
+    ],
+    "image": "hero",
+    "title": [
+      "Del mensaje de cambio a una decisión trazable",
+      "From a change request to a traceable decision"
+    ],
+    "category": [
+      "Coordinación de proyectos",
+      "Project coordination"
+    ],
+    "summary": [
+      "Registrar una solicitud, su decisión y la versión afectada permite saber qué debe ejecutarse y cómo condiciona la entrega. Automatizar ese recorrido exige conservar las aprobaciones.",
+      "Recording a request, its decision and the affected version makes the required work and delivery implications visible. Automating that workflow must preserve the approval process."
+    ],
+    "lead": [
+      "Un cliente pide una modificación por correo. La conversación continúa en otro canal y el equipo actualiza un documento. Días después aparece una duda: ¿se aprobó todo el cambio o solo una parte? En esta situación hipotética, el problema no es la cantidad de mensajes. Es la distancia entre la petición y la decisión que debe ejecutarse.",
+      "A client requests a change by email. The conversation continues in another channel, and the team updates a document. Days later, a question arises: was the whole change approved, or only part of it? In this hypothetical situation, the problem is not the number of messages. It is the gap between the request and the decision that must be implemented."
+    ],
+    "sections": [
+      {
+        "heading": [
+          "Separar petición, decisión y trabajo",
+          "Separate the request, the decision and the work"
+        ],
+        "paragraphs": [
+          [
+            "Una solicitud recibida no equivale a una modificación aprobada. El registro necesita distinguir qué se pide, qué documentación afecta, quién debe revisarlo y cuál es la decisión. Esa separación evita que un comentario informal se convierta en una instrucción ambigua o que una aprobación parcial se interprete como permiso para ejecutar todo.",
+            "A received request is not an approved modification. The record needs to distinguish what is requested, which documents it affects, who must review it and what was decided. This prevents an informal comment from becoming an ambiguous instruction, or a partial approval from being treated as permission to implement the entire change."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "El contexto debe viajar con el cambio",
+          "The context must travel with the change"
+        ],
+        "paragraphs": [
+          [
+            "Además del texto de la solicitud, conviene conservar el proyecto, la referencia documental, la versión de partida y la fecha. La persona responsable registra el alcance autorizado y su efecto previsto en la entrega. Si todavía no se conoce ese efecto, el estado debe mostrarlo como pendiente de evaluación, sin convertir una estimación en una fecha comprometida.",
+            "Alongside the request, retain the project, document reference, starting version and date. The responsible person records the authorised scope and its expected effect on delivery. If that effect is not yet known, the status should identify it as awaiting assessment, rather than turn an estimate into a committed date."
+          ],
+          [
+            "Un identificador común permite enlazar la solicitud con las tareas y con la documentación final. Si la decisión cambia, conservar su historial evita sobrescribir el motivo del trabajo ya realizado. Así puede comprobarse qué versión responde a cada instrucción y qué queda pendiente, sin depender de la memoria de quien participó en la conversación.",
+            "A common identifier links the request to its tasks and final documentation. If the decision changes, preserving its history avoids overwriting the reason for work already completed. This makes it possible to check which version responds to each instruction and what remains outstanding, without relying on the memory of those involved in the conversation."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Automatizar el recorrido, conservar el criterio",
+          "Automate the workflow, preserve professional judgement"
+        ],
+        "paragraphs": [
+          [
+            "Una app puede capturar la solicitud, asignar su revisión y avisar cuando falta una respuesta. Tras registrar una decisión autorizada, puede crear tareas y vincular la nueva versión. La viabilidad técnica, la aprobación del alcance y las decisiones sobre plazos permanecen en sus responsables. La automatización hace visible y ejecutable la decisión; no la toma por ellos.",
+            "An app can capture the request, assign a review and flag a missing response. Once an authorised decision is recorded, it can create tasks and link the new version. Technical feasibility, scope approval and scheduling decisions remain with the responsible people. Automation makes the decision visible and actionable; it does not make that decision for them."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Qué resultado merece comprobarse",
+          "Which outcome is worth checking"
+        ],
+        "paragraphs": [
+          [
+            "La utilidad se aprecia al responder qué está autorizado, qué sigue pendiente y qué entrega podría verse afectada. En un piloto, registra el tiempo necesario para reconstruir una solicitud y las aclaraciones exigidas antes de ejecutarla. Compáralo después con solicitudes de complejidad similar. Así se evalúa si el equipo coordina con más precisión y si el cliente recibe respuestas más consistentes.",
+            "The value becomes clear when answering what is authorised, what remains pending and which delivery may be affected. During a pilot, record the time needed to reconstruct a request and the clarifications required before implementation. Compare this with requests of similar complexity afterwards. This shows whether the team coordinates more precisely and the client receives more consistent responses."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Una primera acción manejable",
+          "A manageable first step"
+        ],
+        "paragraphs": [
+          [
+            "Elige una modificación reciente y sigue su recorrido desde el primer mensaje hasta la versión entregada. Señala dónde se perdió contexto o dónde fue necesario confirmar algo de nuevo. Orquivia puede analizar ese recorrido e implementar un registro conectado a las herramientas existentes, empezando por una clase de solicitud y sus estados esenciales.",
+            "Choose a recent modification and follow its path from the first message to the delivered version. Identify where context was lost or something had to be confirmed again. Orquivia can analyse that workflow and implement a record connected to existing tools, starting with one type of request and its essential statuses."
+          ]
+        ]
+      }
+    ],
+    "question": [
+      "¿Puedes localizar qué se aprobó en la última modificación sin reconstruir toda la conversación?",
+      "Can you locate what was approved in the last modification without reconstructing the entire conversation?"
+    ],
+    "solution": "coordination"
+  },
+  {
+    "key": "article-milestone",
+    "routes": [
+      "del-hito-a-facturacion.html",
+      "from-milestone-to-invoicing.html"
+    ],
+    "image": "time",
+    "title": [
+      "La entrega está hecha. ¿Qué falta para preparar la facturación?",
+      "The work is delivered. What is missing to prepare invoicing?"
+    ],
+    "category": [
+      "Hitos y documentación",
+      "Milestones and documentation"
+    ],
+    "summary": [
+      "La entrega y la preparación administrativa pueden seguir recorridos distintos. Conectar estados y evidencias permite identificar pendientes y preparar la información necesaria según los criterios del encargo.",
+      "Delivery and administrative preparation can follow different paths. Connecting statuses and evidence makes outstanding items visible and prepares the required information according to the commission’s agreed criteria."
+    ],
+    "lead": [
+      "En un encargo hipotético, el equipo completa una entrega, pero la persona que prepara la facturación todavía necesita localizar la confirmación de envío, el identificador del proyecto y el estado de aceptación. El trabajo está terminado, aunque su información sigue dispersa. Esa diferencia puede prolongar la preparación administrativa de un hito.",
+      "In a hypothetical commission, the team completes a delivery, but the person preparing invoicing still needs to locate the sending confirmation, project identifier and acceptance status. The work is complete, yet its information remains scattered. That gap can extend the administrative preparation of a milestone."
+    ],
+    "sections": [
+      {
+        "heading": [
+          "Entregado no significa preparado",
+          "Delivered does not mean prepared"
+        ],
+        "paragraphs": [
+          [
+            "Cada encargo puede exigir datos o evidencias diferentes para preparar este paso. Conviene distinguir la entrega realizada, la aceptación registrada cuando proceda y la información administrativa completa. Mezclarlas en un único estado impide saber qué falta y a quién corresponde resolverlo. Una lista definida según lo previsto en el encargo permite identificar si falta la evidencia de entrega o un dato del proyecto.",
+            "Each commission may require different information or evidence to prepare this step. Distinguish completed delivery, recorded acceptance where applicable and complete administrative information. Combining them into one status hides what is missing and who should resolve it. A list based on the arrangements for the commission identifies whether delivery evidence or a project detail is missing."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "La causa puede estar antes de la entrega",
+          "The cause may precede delivery"
+        ],
+        "paragraphs": [
+          [
+            "Si el identificador del encargo se introduce de varias formas o nadie registra dónde está la evidencia, el último paso hereda esa inconsistencia. Pedir más correos al final alivia el síntoma. Establecer una referencia común y registrar cada dato cuando se genera permite preparar la información sin reconstruir después todo el proyecto.",
+            "If a commission identifier is entered in different ways, or nobody records where the evidence is stored, the final step inherits that inconsistency. Requesting more emails at the end addresses the symptom. A common reference and information recorded when it is created make preparation possible without reconstructing the whole project later."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Una conexión con un alcance concreto",
+          "A connection with a specific scope"
+        ],
+        "paragraphs": [
+          [
+            "Una automatización puede reunir la referencia del proyecto, el hito, los documentos asociados y las confirmaciones disponibles en una vista de preparación. Si falta un elemento definido como necesario, lo señala y asigna su seguimiento. Cuando la información está completa, activa el paso de revisión. La revisión y la autorización de emisión corresponden a la persona responsable.",
+            "An automation can gather the project reference, milestone, associated documents and available confirmations into a preparation view. If an item defined as necessary is missing, it flags it and assigns follow-up. When the information is complete, it triggers the review step. Review and authorisation to issue the invoice belong to the responsible person."
+          ],
+          [
+            "La vista necesita mostrar quién revisa la información y cuándo cambió cada estado. Por ejemplo, «documentación completa» puede estar separado de «revisión finalizada». Esa distinción permite localizar el siguiente paso y evitar avisos repetidos a personas que ya completaron su parte. Administración dispone de un registro completo para preparar el siguiente paso sin volver a solicitar lo que el equipo ya ha registrado.",
+            "The view needs to show who reviews the information and when each status changed. For example, ‘documentation complete’ can remain separate from ‘review completed’. That distinction identifies the next step and avoids repeatedly notifying people who have already completed their part. Administration has a complete record for preparing the next step without requesting information the team has already recorded."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Comprobar el tiempo hasta la preparación",
+          "Check the time until information is ready"
+        ],
+        "paragraphs": [
+          [
+            "La medida útil es el intervalo entre la entrega registrada y el momento en que la información requerida queda disponible para revisión. También pueden observarse las devoluciones por datos incompletos y las consultas necesarias. La comparación debe hacerse entre hitos equivalentes. La prueba debe mostrar si la información para preparar la facturación está disponible antes y con menos búsquedas entre herramientas.",
+            "A useful measure is the interval between recorded delivery and the point when the required information is available for review. You can also observe returns caused by incomplete data and the queries needed. Compare equivalent milestones. The pilot should show whether the information for preparing invoicing is available earlier and requires less searching across tools."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Prueba con un hito reciente",
+          "Try it with a recent milestone"
+        ],
+        "paragraphs": [
+          [
+            "Selecciona una entrega y enumera qué información necesitó la persona responsable para preparar el siguiente paso. Marca qué datos ya existían y cuáles hubo que volver a pedir. Orquivia analiza esas fuentes y puede implementar una conexión o un panel de pendientes. La primera prueba cubre ese recorrido administrativo, con criterios y responsabilidades definidos antes de construir.",
+            "Choose a delivery and list the information the responsible person needed to prepare the next step. Mark which data already existed and which had to be requested again. Orquivia analyses those sources and can implement a connection or an outstanding-items panel. The first trial covers that administrative workflow, with criteria and responsibilities defined before development."
+          ]
+        ]
+      }
+    ],
+    "question": [
+      "¿Qué información falta habitualmente después de registrar una entrega?",
+      "Which information is usually still missing after a delivery is recorded?"
+    ],
+    "solution": "documents"
+  }
+]

@@ -1,0 +1,160 @@
+[
+  {
+    "key": "article-process",
+    "routes": [
+      "antes-de-elegir-herramientas.html",
+      "before-choosing-tools.html"
+    ],
+    "image": "connections",
+    "category": [
+      "Herramientas y procesos",
+      "Tools & processes"
+    ],
+    "title": [
+      "Antes de elegir otra herramienta, mira el recorrido.",
+      "Before choosing another tool, look at the journey."
+    ],
+    "summary": [
+      "Sigue una tarea real antes de añadir otra plataforma. Identifica dónde se detiene y qué entrega, respuesta o encargo condiciona.",
+      "Follow a real task before adding another platform. Identify where it stalls and which delivery, response or commission it affects."
+    ],
+    "lead": [
+      "Una plataforma nueva tiene sentido cuando resuelve una causa concreta. El punto de partida es una tarea del despacho que hoy exige rodeos.",
+      "A new platform makes sense when it addresses a specific cause. Start with a task in your practice that currently takes a roundabout route."
+    ],
+    "sections": [
+      {
+        "heading": [
+          "Empieza por una situación concreta",
+          "Start with a specific situation"
+        ],
+        "paragraphs": [
+          [
+            "Cuando cuesta encontrar un documento o coordinar una aprobación, es tentador buscar una plataforma nueva. Antes, merece la pena seguir el recorrido de una tarea real: dónde empieza, por qué manos pasa y qué necesita cada persona para continuar.",
+            "When a document is hard to find or an approval difficult to coordinate, a new platform can seem attractive. First, follow a real task: where it begins, whose hands it passes through and what each person needs to continue."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Distingue el síntoma de la causa",
+          "Distinguish the symptom from the cause"
+        ],
+        "paragraphs": [
+          [
+            "Un archivo duplicado puede deberse a la herramienta, pero también a un criterio de versiones poco claro o a una responsabilidad que no está definida. Cada causa requiere una respuesta distinta. Dibujar el proceso permite hacer preguntas más precisas.",
+            "A duplicate file might come from the tool, an unclear versioning standard or an undefined responsibility. Each cause needs a different response. Mapping the process makes it possible to ask more precise questions."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Conecta el detalle con su efecto",
+          "Connect the detail to its effect"
+        ],
+        "paragraphs": [
+          [
+            "La pregunta útil no termina en cuánto tiempo consume una tarea. Conviene entender qué desplaza: una entrega, una decisión, la posibilidad de asumir otro encargo o el tiempo disponible para el cliente. Ese efecto permite priorizar.",
+            "The useful question goes beyond how much time a task takes. Understand what it displaces: a delivery, a decision, the ability to accept another commission or time with the client. That effect makes prioritisation possible."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Después, elige qué cambiar",
+          "Then choose what to change"
+        ],
+        "paragraphs": [
+          [
+            "Con el recorrido visible, la mejora puede ser sencilla: unificar un criterio, aclarar una aprobación o conectar dos herramientas existentes. Si hace falta otra plataforma, habrá una razón concreta para elegirla y una forma de comprobar si aporta valor.",
+            "Once the journey is visible, improvement may be simple: agree a standard, clarify an approval or connect two existing tools. If another platform is needed, there will be a specific reason to choose it and a way to assess its value."
+          ]
+        ]
+      }
+    ],
+    "question": [
+      "¿Qué entrega o respuesta se está retrasando por ese paso?",
+      "Which delivery or response is this step holding up?"
+    ],
+    "solution": "integrations"
+  },
+  {
+    "key": "article-step",
+    "routes": [
+      "un-cambio-que-encaja.html",
+      "a-change-that-fits.html"
+    ],
+    "image": "process",
+    "category": [
+      "Cambios que encajan",
+      "Changes that fit"
+    ],
+    "title": [
+      "Un primer cambio pequeño. Un criterio claro para avanzar.",
+      "One small first change. A clear way to move forward."
+    ],
+    "summary": [
+      "Prueba una mejora en un recorrido acotado y compara el resultado con el punto de partida antes de extenderla al resto del despacho.",
+      "Test an improvement in a bounded workflow and compare it with the starting point before extending it across the practice."
+    ],
+    "lead": [
+      "Un primer proceso ofrece una prueba concreta del valor de la mejora. Definir qué debe cambiar permite decidir con datos si conviene ampliarla.",
+      "One initial process provides a concrete test of an improvement’s value. Defining what should change makes it possible to decide from evidence whether to expand it."
+    ],
+    "sections": [
+      {
+        "heading": [
+          "Define lo que quieres conseguir",
+          "Define what you want to achieve"
+        ],
+        "paragraphs": [
+          [
+            "Una mejora resulta más fácil de valorar cuando describe una situación observable. Por ejemplo: que cualquier persona del equipo pueda consultar el estado de una revisión sin reconstruir una cadena de mensajes.",
+            "An improvement is easier to assess when it describes an observable situation. For example: anyone on the team can check the status of a review without reconstructing a chain of messages."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Delimita un primer recorrido",
+          "Define a first pathway"
+        ],
+        "paragraphs": [
+          [
+            "Elige un proceso, un tipo de proyecto o una revisión concreta. Identifica a las personas que lo conocen y delimita qué parte se va a probar. Un alcance acotado permite aprender manteniendo la continuidad del trabajo.",
+            "Choose a process, a type of project or a specific review. Identify the people who know it and define which part to test. A bounded scope makes learning possible while work continues."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Observa antes y después",
+          "Observe before and after"
+        ],
+        "paragraphs": [
+          [
+            "Registra una referencia inicial con los datos disponibles: cuánto tarda una validación, cuántas veces se repite una tarea o cuántas consultas requiere. Después de la prueba, contrasta esas mismas señales. El objetivo es aprender del cambio.",
+            "Record a baseline using available data: how long an approval takes, how often a task is repeated or how many questions it requires. After the trial, compare the same signals. The aim is to learn from the change."
+          ]
+        ]
+      },
+      {
+        "heading": [
+          "Conserva lo útil y ajusta",
+          "Keep what works and adjust"
+        ],
+        "paragraphs": [
+          [
+            "Una prueba no obliga a extender todo lo diseñado. Revisad qué ha funcionado, qué añade esfuerzo y qué conviene simplificar. Documentar el recorrido resultante permite que la mejora pertenezca al equipo y pueda evolucionar con el siguiente proyecto.",
+            "A trial does not mean everything must be rolled out. Review what worked, what added effort and what should be simplified. Documenting the resulting workflow lets the team own the improvement and develop it with the next project."
+          ]
+        ]
+      }
+    ],
+    "question": [
+      "¿Qué resultado justificaría ampliar la mejora a otros proyectos?",
+      "Which result would justify extending the improvement to other projects?"
+    ],
+    "solution": "coordination"
+  }
+]

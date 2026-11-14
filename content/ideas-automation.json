@@ -1,0 +1,140 @@
+[
+  {
+    "key": "article-onboarding",
+    "routes": ["alta-encargo-sin-duplicar-datos.html", "project-intake-without-duplicate-data.html"],
+    "image": "connections",
+    "title": ["Un encargo. Un solo registro.", "One project. One record."],
+    "category": ["Conexiones", "Connections"],
+    "summary": ["Cuando un nuevo encargo obliga a repetir la misma información, conectar el alta con carpetas, documentos y tareas puede dar al despacho más capacidad.", "When starting a project means entering the same information repeatedly, connecting intake to folders, documents and tasks can give the practice more capacity."],
+    "lead": ["Un encargo aprobado debería empezar a avanzar. Si antes hay que copiar el nombre del cliente, la dirección, los contactos y las fechas en varios lugares, el arranque ya depende de una cadena de tareas manuales. Ese recorrido puede ser un buen primer candidato para una automatización acotada.", "An approved project should be ready to move forward. If the client’s name, address, contacts and dates first need copying into several places, starting work already depends on a chain of manual tasks. That workflow can be a useful first candidate for a small, focused automation."],
+    "sections": [
+      {
+        "heading": ["El arranque que se repite", "The setup that keeps repeating"],
+        "paragraphs": [
+          ["Imagina un despacho que acaba de confirmar un encargo. Una persona lo apunta en una hoja de seguimiento; otra crea las carpetas; una tercera prepara una plantilla con los mismos datos. Una modificación posterior obliga a localizar y corregir cada copia.", "Imagine a practice that has just confirmed a project. One person adds it to a tracking sheet, another creates the folders, and a third prepares a template with the same details. A later change means finding and correcting every copy."],
+          ["El trabajo sale, pero cada alta necesita atención dispersa. Cuando coinciden varios encargos, esas pequeñas acciones compiten con la coordinación y la preparación de las primeras entregas.", "Work gets done, but each new project requires attention in several places. When projects arrive together, these small tasks compete with coordination and preparing the first deliverables."]
+        ]
+      },
+      {
+        "heading": ["El dato no tiene un punto de partida", "The data has no clear starting point"],
+        "paragraphs": [
+          ["El síntoma es copiar y pegar. La causa puede ser que ninguna herramienta tenga una función clara como registro principal: los datos llegan por correo, se trasladan de memoria y se actualizan según quién los utiliza.", "Copying and pasting is the symptom. The cause may be that no tool has a clear role as the main record: details arrive by email, move through memory, and get updated according to who uses them."],
+          ["Antes de conectar plataformas, conviene distinguir qué información es obligatoria, quién la valida y qué destinos realmente la necesitan. Automatizar datos incompletos solo propaga la misma incertidumbre con más rapidez.", "Before connecting platforms, establish which information is required, who validates it, and which destinations actually need it. Automating incomplete data only spreads the same uncertainty faster."]
+        ]
+      },
+      {
+        "heading": ["Registrar una vez, preparar lo necesario", "Enter once, prepare what is needed"],
+        "paragraphs": [
+          ["Una solución posible es un formulario de alta que comprueba los campos mínimos y asigna una referencia única. Tras la validación, crea la estructura de carpetas, completa las plantillas iniciales y genera las tareas previstas en las herramientas compatibles.", "One possible solution is an intake form that checks required fields and assigns a unique project reference. Once validated, it creates folders, fills initial templates, and generates planned tasks in compatible tools."],
+          ["Las excepciones quedan visibles para revisión, en lugar de ejecutar un alta incompleta. Si cambia un dato, se define qué destinos deben actualizarse y cuáles deben conservar su versión original.", "Exceptions remain visible for review instead of triggering an incomplete setup. When a detail changes, the workflow defines which destinations need updating and which must keep their original version."]
+        ]
+      },
+      {
+        "heading": ["Medir el arranque, no solo los clics", "Measure the start, not just the clicks"],
+        "paragraphs": [
+          ["La prueba puede comparar altas similares antes y después: tiempo hasta dejar el encargo preparado, correcciones necesarias y número de intervenciones manuales. El objetivo es comprobar si el despacho puede iniciar más trabajo sin multiplicar la gestión de cada alta. La primera versión puede centrarse en la carpeta y una plantilla, dejando visibles los errores antes de conectar otros destinos.", "A pilot can compare similar project setups before and after: time until the project is ready, corrections needed, and manual interventions. The aim is to establish whether the practice can start more work without multiplying administration for each project. The first version can cover the folder and one template, making errors visible before connecting further destinations."]
+        ]
+      },
+      {
+        "heading": ["Empieza por el último encargo", "Start with the most recent project"],
+        "paragraphs": [
+          ["Reúne los lugares donde se introdujeron los datos del último proyecto y marca qué información se repitió. Ese ejemplo concreto basta para una primera conversación. Orquivia analiza el recorrido, propone una conexión viable e implementa una prueba con un tipo de encargo antes de ampliar el alcance.", "List the places where details for the latest project were entered and mark the information that was repeated. That concrete example is enough for a first conversation. Orquivia analyses the workflow, proposes a viable connection, and implements a pilot for one project type before expanding its scope."]
+        ]
+      }
+    ],
+    "question": ["¿En cuántos lugares se vuelve a escribir la información cuando entra un nuevo encargo?", "How many places require the same information when a new project starts?"],
+    "solution": "integrations"
+  },
+  {
+    "key": "article-documents",
+    "routes": ["documentacion-pendiente-entrega.html", "outstanding-documents-delivery.html"],
+    "image": "documents",
+    "title": ["Lo pendiente también tiene fecha.", "Outstanding items need a date too."],
+    "category": ["Documentación", "Documents"],
+    "summary": ["Un documento pendiente puede condicionar una entrega. Solicitudes, avisos y estados conectados permiten ver el bloqueo antes de que llegue la fecha prevista.", "An outstanding document can hold up a delivery. Connected requests, reminders and status records make the blocker visible before the scheduled delivery date arrives."],
+    "lead": ["La fecha de entrega está marcada, pero falta una pieza de información. El problema no siempre es que alguien llegue tarde: a veces nadie puede ver con claridad qué se pidió, quién debe responder y desde cuándo está pendiente. Ordenar ese recorrido permite anticipar el bloqueo y actuar con una referencia concreta.", "The delivery date is set, but a piece of information is missing. The problem is not always that someone is late: sometimes nobody can clearly see what was requested, who should respond, or how long it has been outstanding. Organising that workflow makes the blocker visible and gives action a clear starting point."],
+    "sections": [
+      {
+        "heading": ["El correo enviado no cierra el pendiente", "Sending the email does not resolve the item"],
+        "paragraphs": [
+          ["Imagina que un equipo prepara una entrega y necesita documentación de varias personas. Las peticiones salen por correo y las respuestas llegan en momentos distintos. Para saber si está todo, una persona vuelve a recorrer mensajes, carpetas y notas.", "Imagine a team preparing a delivery that requires documents from several people. Requests go out by email and responses arrive at different times. To check whether everything is ready, someone goes back through messages, folders and notes."],
+          ["Puede encontrar el archivo, pero aún no saber si está completo o revisado. Mientras se aclara, la preparación final pierde margen y la fecha sigue acercándose.", "They may find the file without knowing whether it is complete or reviewed. While that gets clarified, the final preparation loses breathing room and the deadline keeps approaching."]
+        ]
+      },
+      {
+        "heading": ["Falta un estado compartido", "A shared status is missing"],
+        "paragraphs": [
+          ["Insistir por correo es el síntoma. La causa puede estar en un seguimiento que confunde solicitado, recibido, revisado y listo para entregar. Son estados diferentes: recibir un archivo no implica que el requisito esté resuelto.", "Repeated email chasing is the symptom. The cause may be a tracking process that treats requested, received, reviewed and ready for delivery as the same thing. They are different states: receiving a file does not mean the requirement is resolved."],
+          ["La mejora empieza por definir qué condición permite avanzar, quién puede confirmarla y qué entrega depende de ella. Un listado enorme sin estas relaciones puede seguir dejando los bloqueos ocultos.", "Improvement starts with defining the condition that allows progress, who can confirm it, and which deliverable depends on it. A long list without these relationships can still leave blockers hidden."]
+        ]
+      },
+      {
+        "heading": ["Una petición que deja rastro", "A request with a visible trail"],
+        "paragraphs": [
+          ["Una automatización puede registrar cada solicitud con su responsable, fecha necesaria y entrega asociada. La recepción actualiza el estado y guarda el archivo en el lugar previsto. Si falta una respuesta, un aviso identifica el pendiente y su contexto.", "An automation can record each request with its owner, required date and associated deliverable. Receipt updates its status and stores the file in the intended location. If a response is missing, a reminder identifies the outstanding item and its context."],
+          ["Cuando el contenido exige criterio técnico, la persona competente mantiene la revisión y la aprobación. El sistema organiza los pasos y muestra la espera; no convierte una recepción automática en una validación técnica.", "When the content requires technical judgement, the appropriate professional remains responsible for review and approval. The system organises the steps and makes the wait visible; automatic receipt is not technical approval."]
+        ]
+      },
+      {
+        "heading": ["La entrega es la referencia", "The deliverable is the reference point"],
+        "paragraphs": [
+          ["En una prueba, registra cuánto transcurre entre solicitud, recepción y revisión, cuántos pendientes se detectan al final y qué entregas se frenan por falta de información. Después compara un recorrido equivalente. La utilidad está en recuperar margen para entregar, no en aumentar la cantidad de avisos. También conviene comprobar que el equipo interpreta los estados de la misma manera y que cada aviso llega a la persona adecuada.", "For a pilot, record the time between request, receipt and review, how many outstanding items are discovered at the last stage, and which deliveries are held up by missing information. Then compare an equivalent workflow. Value comes from gaining room to deliver, not from sending more reminders. Also check that the team interprets statuses consistently and that each reminder reaches the appropriate person."]
+        ]
+      },
+      {
+        "heading": ["Elige una entrega reciente", "Choose a recent delivery"],
+        "paragraphs": [
+          ["Toma una entrega donde hubo que reclamar información y reconstruye solo ese recorrido: petición, respuesta, revisión y efecto sobre la fecha. Orquivia puede analizarlo y proponer un seguimiento automatizado para ese tipo de documentación, con avisos proporcionados y una vista clara de lo que todavía impide avanzar.", "Take a delivery that required chasing information and reconstruct only that workflow: request, response, review and the effect on timing. Orquivia can analyse it and propose automated tracking for that document type, with proportionate reminders and a clear view of what still prevents progress."]
+        ]
+      }
+    ],
+    "question": ["¿Puedes ver hoy qué información pendiente condiciona la próxima entrega y quién debe responder?", "Can you see which outstanding information affects the next delivery and who needs to respond?"],
+    "solution": "documents"
+  },
+  {
+    "key": "article-status",
+    "routes": ["estado-proyecto-responder-cliente.html", "project-status-client-response.html"],
+    "image": "studio",
+    "title": ["Responder sin reconstruir el proyecto.", "Answer without rebuilding the project story."],
+    "category": ["Aplicaciones a medida", "Custom applications"],
+    "summary": ["Si responder al cliente exige cruzar mensajes y hojas, una vista de hitos y pendientes puede reunir el contexto necesario para una respuesta clara.", "If answering a client means cross-checking messages and spreadsheets, a view of milestones and outstanding items can bring together the context for a clear response."],
+    "lead": ["«¿En qué punto estamos?» parece una pregunta breve. Si para contestarla hay que preguntar a varias personas, revisar correos y confirmar qué hoja está actualizada, la respuesta requiere reconstruir el proyecto. Una aplicación a medida puede reunir el estado relevante, siempre que exista una forma clara de mantenerlo vigente.", "“Where are we now?” sounds like a brief question. If answering it means asking several people, checking emails and confirming which spreadsheet is current, the response requires rebuilding the project story. A custom application can bring the relevant status together, provided there is a clear way to keep it current."],
+    "sections": [
+      {
+        "heading": ["Una pregunta interrumpe varios trabajos", "One question interrupts several tasks"],
+        "paragraphs": [
+          ["Imagina que una gestora necesita informar al cliente sobre el siguiente hito. El calendario muestra una fecha, una hoja marca tareas en curso y un correo contiene una decisión que todavía no aparece en ninguno de los dos lugares.", "Imagine a project manager who needs to update the client about the next milestone. The calendar shows a date, a spreadsheet lists work in progress, and an email contains a decision that has not reached either place."],
+          ["Para dar una respuesta fiable, consulta al equipo y contrasta la información. Cuando esa pregunta se repite en varios proyectos, la coordinación absorbe atención que también necesitan las entregas.", "To give a reliable response, she checks with the team and compares the information. When the question repeats across projects, coordination consumes attention that deliverables also need."]
+        ]
+      },
+      {
+        "heading": ["Otro panel no resuelve la causa", "Another dashboard does not resolve the cause"],
+        "paragraphs": [
+          ["El síntoma es tardar en responder. La causa puede ser que cada herramienta describa una parte del trabajo, sin vincular tareas, decisiones y entregas. Añadir un panel que alguien deba actualizar aparte puede crear una copia más.", "Slow responses are the symptom. The cause may be that each tool describes part of the work without linking tasks, decisions and deliverables. Adding a dashboard that needs separate updating can create another copy."],
+          ["Primero hay que identificar qué información necesita una respuesta y de dónde procede. Un estado útil distingue lo terminado, lo que espera una decisión y el próximo compromiso; también muestra cuándo se actualizó.", "First, identify the information a response requires and where it comes from. A useful status distinguishes completed work, items awaiting a decision and the next commitment; it also shows when it was updated."]
+        ]
+      },
+      {
+        "heading": ["Una vista diseñada para responder", "A view designed for answering"],
+        "paragraphs": [
+          ["Una aplicación puede reunir proyectos, hitos, responsables y pendientes, conectando las fuentes disponibles. Desde cada hito se ve qué falta y qué información lo respalda. Los cambios relevantes generan avisos concretos, sin obligar a revisar toda la cartera.", "An application can bring together projects, milestones, owners and outstanding items by connecting available sources. Each milestone shows what is missing and the information behind it. Relevant changes trigger specific notifications without requiring a review of the entire portfolio."],
+          ["Si una fuente no permite conexión, se limita la entrada manual a lo imprescindible y se asigna una responsabilidad de actualización. La vista interna puede incluir decisiones que no deben compartirse automáticamente con el cliente.", "If a source cannot be connected, manual entry is kept to what is essential, with a clear responsibility for updates. The internal view may include decisions that should not be shared with the client automatically."]
+        ]
+      },
+      {
+        "heading": ["Comprobar la calidad de la respuesta", "Check the quality of the response"],
+        "paragraphs": [
+          ["Para una prueba, registra cuánto se tarda en responder a preguntas de estado, cuántas consultas internas hacen falta y cuántas respuestas requieren corrección. Compara preguntas similares después de la implantación. La mejora debe facilitar respuestas fiables y anticipar bloqueos, además de reducir la búsqueda. Revisa también si mantener la vista exige tareas adicionales: su actualización debe encajar en el recorrido habitual del proyecto.", "For a pilot, record how long status questions take to answer, how many internal checks are needed, and how often answers require correction. Compare similar questions after implementation. The improvement should make responses reliable and reveal blockers earlier, as well as reduce searching. Also check whether maintaining the view adds work: updates should fit the project’s existing workflow."]
+        ]
+      },
+      {
+        "heading": ["Empieza con una pregunta real", "Start with a real question"],
+        "paragraphs": [
+          ["Recupera la última pregunta de un cliente que obligó a contrastar varias fuentes. Señala qué necesitaste consultar y qué faltaba. Con ese ejemplo, Orquivia analiza el recorrido y propone una primera vista para un grupo acotado de proyectos, antes de plantear una aplicación para todo el despacho.", "Find the latest client question that required checking several sources. Note what you consulted and what was missing. Using that example, Orquivia analyses the workflow and proposes an initial view for a limited group of projects before considering an application for the whole practice."]
+        ]
+      }
+    ],
+    "question": ["¿Qué necesitas consultar hoy para dar al cliente una respuesta de estado que puedas sostener?", "What do you need to check today to give the client a status update you can stand behind?"],
+    "solution": "coordination"
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "key": "queries",
+    "image": "app-consultas-plano-ficticio-v3",
+    "title": [
+      "Cada consulta, en su contexto.",
+      "Every query, in context."
+    ],
+    "description": [
+      "Una aplicación para crear y seguir consultas visualmente desde un plano. El proyecto como punto de partida para localizar el seguimiento.",
+      "An application for creating and tracking queries visually from a drawing. The project provides the context for finding the follow-up."
+    ],
+    "alt": [
+      "Aplicación de consultas con un plano ficticio de un edificio con patio y panel de seguimiento",
+      "Query application with a fictional courtyard building plan and a tracking panel"
+    ],
+    "service": "coordination",
+    "width": 1586,
+    "height": 992
+  },
+  {
+    "key": "operations",
+    "image": "app-operaciones-captura-v2",
+    "title": [
+      "El trabajo y su avance, a la vista.",
+      "The work and its progress, visible."
+    ],
+    "description": [
+      "Una herramienta para registrar actuaciones y consultar su estado. El seguimiento se adapta a la secuencia de trabajo del equipo.",
+      "A tool for recording assignments and checking their status. Tracking fits the team’s sequence of work."
+    ],
+    "alt": [
+      "Interfaz de la aplicación de control de trabajos con datos de muestra",
+      "Work tracking application interface with sample data"
+    ],
+    "service": "operations",
+    "width": 1578,
+    "height": 996
+  },
+  {
+    "key": "quotes",
+    "image": "app-presupuestos-captura-v2",
+    "title": [
+      "De la gestión al documento.",
+      "From management to the document."
+    ],
+    "description": [
+      "Preparación de presupuestos con una vista previa del documento. Una de las aplicaciones desarrolladas para gestionar presupuestos, facturas y gastos.",
+      "Quotation preparation with a document preview. One of the applications developed to manage quotes, invoices and expenses."
+    ],
+    "alt": [
+      "Interfaz de presupuestos con formulario y vista previa y datos de muestra",
+      "Quotation application interface with form and preview containing sample data"
+    ],
+    "service": "coordination",
+    "width": 1586,
+    "height": 992
+  }
+]
